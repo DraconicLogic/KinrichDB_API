@@ -1,6 +1,6 @@
 const app = require('../app.js')
 const  request  = require('supertest')
-const db = require('../db/index.js')
+
 
 describe('Nnenna Textiles API',() => {
   describe('Connection to database', () => {
