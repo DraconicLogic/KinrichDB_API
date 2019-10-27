@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const testRouter = require('./routes/test.js')
+
+app.use('/test', testRouter)
 
 
 module.exports = app
