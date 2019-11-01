@@ -1,6 +1,5 @@
-const db = require('./db/index.js')
 const fs = require('fs')
-
+const db = require('./db/index.js')
 
 function generateCode() {
   function getRandomInt(max) {
@@ -28,9 +27,23 @@ function generateUniqueCode(currentCodes) {
   return uniqueCode
 }
 
-function getUniqueCodes() {
+function getCodes() {
   const query = 'SELECT RecallID FROM stacks'
-  const curentCodes = db.query(query)
+  return db.query(query)
+  .then(({rows}) => {
+    
+    return rows
+  })
 }
 
-module.exports = {generateCode, generateUniqueCode}
+async function makeCurrentCodesJSON() {
+  const currentCodes  = await getCodes() 
+ fs.writeFileSync('./current_codes.json', JSON.stringify(currentCodes, null, 2))
+}
+
+module.exports = {
+  generateCode,
+  generateUniqueCode,
+  getCodes,
+  makeCurrentCodesJSON
+} 
