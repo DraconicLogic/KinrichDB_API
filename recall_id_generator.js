@@ -38,8 +38,16 @@ function getCodes() {
 
 async function makeCurrentCodesJSON() {
   const currentCodes  = await getCodes() 
- fs.writeFileSync('./current_codes.json', JSON.stringify(currentCodes, null, 2))
+  console.log('CURRENT CODES TYPE: ',typeof currentCodes)
+  const formatCodes = currentCodes.reduce((array, entry) => {
+    array.push(entry.recallid)
+    return array
+  }, [])
+  console.log(formatCodes)
+ fs.writeFileSync('./current_codes.json', JSON.stringify(formatCodes, null, 2))
 }
+
+makeCurrentCodesJSON()
 
 module.exports = {
   generateCode,

@@ -1,5 +1,6 @@
 const {generateCode, generateUniqueCode, getCodes} = require('../recall_id_generator.js')
 const {fillValidCodes} = require('./util')
+const currentCodes = require
 
 
 describe('Recall ID Generator', () => {
@@ -13,7 +14,6 @@ describe('Recall ID Generator', () => {
       const expected = '123'
       const codes = fillValidCodes(expected)
       expect(generateUniqueCode(codes)).toBe(expected)
-
     })
 
   })
