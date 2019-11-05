@@ -1,3 +1,4 @@
+// this function creates an array of all valid 3 digit codes from 001 - 999 except the code passed as a parameter
 function fillValidCodes(excempt){
   let num = 0
   const codes = []

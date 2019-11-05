@@ -12,9 +12,14 @@ describe('Recall ID Generator', () => {
   describe('generateUnqiueCode()', () => {
     it('returns code not currently in array of codes', () => {
       const expected = '123'
+      // this function, fillValidCodes creates an array of all valid 3 digit codes from 001 - 999 except the code passed as a parameter
       const codes = fillValidCodes(expected)
       expect(generateUniqueCode(codes)).toBe(expected)
     })
+    // it("throws an error if there are no available codes", () => {
+    //   const codes = fillValidCodes()
+    //   expect(generateUniqueCode(codes)).toThrowError('No codes availble')
+    // })
 
   })
 

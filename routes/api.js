@@ -1,6 +1,9 @@
 const apiRouter = require('express').Router()
+const stacksRouter = require('./stackRoutes.js')
 
-apiRouter.route()
+
+apiRouter.use('/stacks', stacksRouter)
 
 
-module.exports = { apiRouter }
+
+module.exports =  apiRouter 

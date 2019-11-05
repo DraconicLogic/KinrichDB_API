@@ -1,7 +1,9 @@
 const stackRouter = require('express').Router()
-const {} = require('../recall_id_generator.js')
-const currentStack = require('../current_codes.json')
+const {addStackToDB} = require('../controllers/stackControllers')
 
 
+stackRouter.route('/')
+  .post(addStackToDB)
 
-module.exports = {stackRouter}
+
+module.exports = stackRouter

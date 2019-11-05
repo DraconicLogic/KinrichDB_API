@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "API for interaction with Nnenna Textiles Database",
   "main": "index.js",
+  "nodemonConfig": {
+    "ignore": ["currentCodes.json"]
+  },
   "scripts": {
     "start": "nodemon index.js",
     "test": "jest --watch spec",

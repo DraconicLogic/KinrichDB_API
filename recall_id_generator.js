@@ -14,9 +14,9 @@ function generateCode() {
   return formatedCode
 }
 
+// this function creates an array of all valid 3 digit codes from 001 - 999 except the code passed as a parameter
 function generateUniqueCode(currentCodes) {
   const codes = new Set(currentCodes);
-  
   let uniqueCode = null;
   while (uniqueCode === null) {
     const newCode = generateCode()
@@ -44,7 +44,7 @@ async function makeCurrentCodesJSON() {
     return array
   }, [])
   console.log(formatCodes)
- fs.writeFileSync('./current_codes.json', JSON.stringify(formatCodes, null, 2))
+ fs.writeFileSync('./currentCodes.json', JSON.stringify(formatCodes, null, 2))
 }
 
 makeCurrentCodesJSON()
