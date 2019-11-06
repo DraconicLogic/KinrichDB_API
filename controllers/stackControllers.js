@@ -1,5 +1,5 @@
 const currentCodes = require('../currentCodes.json')
-const {generateUniqueCode} = require('../recall_id_generator.js')
+const {generateUniqueCode, addToCurrentCodesJSON} = require('../recall_id_generator.js')
 const db = require('../db/index.js')
 
 function addStackToDB(req, res, next){
@@ -16,8 +16,10 @@ function addStackToDB(req, res, next){
   db.query(query)
     .then(({rows}) => {
       console.log('AFTER QUERY: ', rows)
+      addToCurrentCodesJSON(rows[0].recallid)
       res.status(201).send(rows[0])
     })
+    .catch((error) => console.error(error))
   
 
     
