@@ -1,7 +1,5 @@
 const fs = require('fs')
 const db = require('./db/index.js')
-const currentCodes = require('./currentCodes.json')
-
 
 function generateCode() {
   function getRandomInt(max) {
@@ -46,12 +44,6 @@ async function makeCurrentCodesJSON() {
  fs.writeFileSync('./currentCodes.json', JSON.stringify(formatCodes, null, 2))
 }
 
-function addToCurrentCodesJSON(uniqueCode){
-
-  const newJSON = [...currentCodes]
-  newJSON.push(uniqueCode)
-  fs.writeFileSync('./currentCodes.json', JSON.stringify(newJSON, null, 2))
-}
 
 makeCurrentCodesJSON()
 
@@ -60,5 +52,4 @@ module.exports = {
   generateUniqueCode,
   getCodes,
   makeCurrentCodesJSON,
-  addToCurrentCodesJSON
 } 

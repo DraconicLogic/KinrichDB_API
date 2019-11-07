@@ -1,8 +1,9 @@
 const stackRouter = require('express').Router()
-const {addStackToDB} = require('../controllers/stackControllers')
+const {addStackToDB, getStacks} = require('../controllers/stackControllers')
 
 
 stackRouter.route('/')
+  .get(getStacks)
   .post(addStackToDB)
 
 

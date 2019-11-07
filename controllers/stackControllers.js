@@ -1,5 +1,5 @@
 const currentCodes = require('../currentCodes.json')
-const {generateUniqueCode, addToCurrentCodesJSON} = require('../recall_id_generator.js')
+const { generateUniqueCode, makeCurrentCodesJSON} = require('../recall_id_generator.js')
 const db = require('../db/index.js')
 
 function addStackToDB(req, res, next){
@@ -16,14 +16,24 @@ function addStackToDB(req, res, next){
   db.query(query)
     .then(({rows}) => {
       console.log('AFTER QUERY: ', rows)
-      addToCurrentCodesJSON(rows[0].recallid)
+      makeCurrentCodesJSON()
       res.status(201).send(rows[0])
     })
     .catch((error) => console.error(error))
-  
-
-    
-  
 }
 
-module.exports = {addStackToDB}
+function getStacks(req, res, next){
+  const query = {
+    name: 'get-stacks',
+    text: 'SELECT * FROM stacks'
+  }
+
+  db.query(query)
+    .then(({rows}) => {
+      console.log('AFTER QUERY: ', rows)
+      res.status(200).send(rows)
+    })
+    .catch((error) => console.error(error))
+}
+
+module.exports = {addStackToDB, getStacks}
