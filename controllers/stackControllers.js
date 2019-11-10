@@ -2,7 +2,7 @@ const currentCodes = require('../currentCodes.json')
 const { generateUniqueCode, makeCurrentCodesJSON} = require('../recall_id_generator.js')
 const db = require('../db/index.js')
 
-function addStackToDB(req, res, next){
+function addStack(req, res, next){
   const { content } = req.body
   const uniqueID = generateUniqueCode(currentCodes)
   console.log(uniqueID)
@@ -36,4 +36,4 @@ function getStacks(req, res, next){
     .catch((error) => console.error(error))
 }
 
-module.exports = {addStackToDB, getStacks}
+module.exports = {addStack, getStacks}

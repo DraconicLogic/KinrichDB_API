@@ -1,19 +1,18 @@
 const db = require('../db/index.js')
+const { makeCurrentCodesJSON } = require('../recall_id_generator.js')
 
 const seedDB = (stacks) => {
-  db.query("DELETE FROM stacks RETURNING *")
-  .then((result) => {
-    
-    console.log('DELETE stacks records: ', result)
+  return db.query("DELETE FROM stacks")
+  .then(() => {
     return stacks.map((stack) => {
       const { recallId, content, date } = stack
       const query = {
-        text: 'INSERT INTO stacks VALUES ($1, $2) RETURNING *',
-        values: [recallId, content]
+        text: 'INSERT INTO stacks VALUES ($1, $2, $3) RETURNING *',
+        values: [recallId, content, date]
       }
       db.query(query)
       .then((result) => {
-      console.log('SEEDING SUCCESFUL?: ', result)
+      makeCurrentCodesJSON()
       return result
       })
     })
