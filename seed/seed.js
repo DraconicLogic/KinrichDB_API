@@ -6,6 +6,7 @@ const seedDB = (stacks) => {
   .then(() => {
     return stacks.map((stack) => {
       const { recallId, content, date } = stack
+      console.log('RECALL ID TYPE DURING SEEDING: ', typeof recallId)
       const query = {
         text: 'INSERT INTO stacks VALUES ($1, $2, $3) RETURNING *',
         values: [recallId, content, date]
@@ -13,6 +14,7 @@ const seedDB = (stacks) => {
       db.query(query)
       .then((result) => {
       makeCurrentCodesJSON()
+      console.info('SEEDING COMPLETED')
       return result
       })
     })

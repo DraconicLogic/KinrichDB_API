@@ -1,45 +1,43 @@
 const db = require('../db/index.js')
+const {makeCurrentCodesJSON} = require('../recall_id_generator.js')
 
-function addContainer(req, res, next){
-  console.log('ADDING CONTAINER')
-  
-  const { containerNumber, sealNumber, content } = req.body
+function addContainer(req, res, next){  
+  const { containerNumber, sealNumber, content, date } = req.body
 
   const recallIds = content.map((stack) => {
-    return stack.recallId
+    return stack.recallId ? stack.recallId : null
   })
-  console.log('ARRAY OF RECALL IDS: ', recallIds)
 
   const formatedContent = content.map((stack) => {
-  
-    console.log('STACK WHILE FORMATTING: ', stack)
     return stack.content
   })
-  console.log('FORMATTED CONTENT: ', formatedContent)
 
   const queryOne = {
     name: "add-container",
-    text: 'INSERT INTO containers VALUES ($1, $2, $3) RETURNING *',
-    values: [containerNumber, sealNumber, formatedContent]
+    text: 'INSERT INTO containers VALUES ($1, $2, $3, $4) RETURNING *',
+    values: [containerNumber, sealNumber, formatedContent, date]
   }
 
   db.query(queryOne)
     .then(({rows}) => {
       console.log('AFTER QUERY: ', rows)
+
       recallIds.forEach((id) => {
+        
         const queryTwo = {
           name: "cleanup-stacks",
-          text: `DELETE FROM stacks WHERE recallid=${id}`
+          text: `DELETE FROM stacks WHERE recallid = ${id}::text`
         }
-        console.log(id)
+        console.log('RECALL ID TYPE: ', typeof id)
         db.query(queryTwo)
           .catch((error) => console.error(error))
 
       })
       res.status(200).send(rows)
+
     })
     .catch((error) => console.error(error))
-
+    .finally(() => makeCurrentCodesJSON())
 }
 
 module.exports = { addContainer }
