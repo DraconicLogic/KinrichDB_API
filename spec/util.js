@@ -18,4 +18,14 @@ function fillValidCodes(excempt){
   return codes
 }
 
-module.exports = { fillValidCodes }
+function formatDBContent(string){
+  const newContent = string
+  .slice(1, (string.length - 1) )
+  .split(',')
+  .map((entry) => {
+    return entry.slice(1, (entry.length - 1))
+  })
+  return newContent
+}
+
+module.exports = { fillValidCodes, formatDBContent }
