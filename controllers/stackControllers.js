@@ -1,17 +1,14 @@
 const currentCodes = require('../currentCodes.json')
-const { generateUniqueCode, makeCurrentCodesJSON} = require('../recall_id_generator.js')
 const db = require('../db/index.js')
 const { formatDBContent } = require('../spec/util.js')
 
 function addStack(req, res, next){
-  const { content, date } = req.body
-  const uniqueID = generateUniqueCode(currentCodes)
-  console.log(uniqueID)
-  
+  const { recallid, content, date } = req.body
+    
   const query = {
     name: 'add-stack',
     text: "INSERT INTO stacks VALUES ($1, $2, $3) RETURNING *",
-    values: [uniqueID, content, date ]
+    values: [recallid, content, date ]
   }
 
   db.query(query)
@@ -24,8 +21,7 @@ function addStack(req, res, next){
         content: formattedContent,
         date: stack.date
       }
-      makeCurrentCodesJSON()
-      res.status(201).send(newStack)
+          res.status(201).send(newStack)
     })
     .catch((error) => console.error(error))
 }
@@ -39,7 +35,17 @@ function getStacks(req, res, next){
   db.query(query)
     .then(({rows}) => {
       console.log('AFTER QUERY: ', rows)
-      res.status(200).send(rows)
+      const formattedStacks = rows.map((stack) => {
+        const {recallid, content} = stack
+        const formattedContent = formatDBContent(content)
+        const newStack = {
+          recallid,
+          content: formattedContent
+        }
+        return newStack
+      })
+      console.log('FORMATTED STACKS: ', formattedStacks)
+      res.status(200).send(formattedStacks)
     })
     .catch((error) => console.error(error))
 }

@@ -1,5 +1,4 @@
 const db = require('../db/index.js')
-const {makeCurrentCodesJSON} = require('../recall_id_generator.js')
 
 function addContainer(req, res, next){  
   const { containerNumber, sealNumber, content, date } = req.body
