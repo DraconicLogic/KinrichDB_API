@@ -49,4 +49,18 @@ function getStacks(req, res, next){
     .catch((error) => console.error(error))
 }
 
-module.exports = {addStack, getStacks}
+function removeStacksByRecallid(req, res, next){
+  const {usedCodes} = req.body
+  usedCodes.forEach((recallid) => {
+    const query = {
+      name: "cleanup-stacks",
+      text: `DELETE FROM stacks WHERE recallid = ${recallid}::text`
+    }
+    
+    db.query(query)
+    .finally(() => res.status(204))
+    .catch((error) => console.error(error))
+  })
+}
+
+module.exports = {addStack, getStacks, removeStacksByRecallid}
