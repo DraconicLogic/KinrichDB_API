@@ -1,27 +1,21 @@
 const db = require('../db/index.js')
 
 function addContainer(req, res, next){  
-  const { containerNumber, sealNumber, content, date } = req.body
+  const { containerNumber, sealNumber, containerContent, date, usedCodes } = req.body
 
-  const recallIds = content.map((stack) => {
-    return stack.recallId ? stack.recallId : null
-  })
 
-  const formatedContent = content.map((stack) => {
-    return stack.content
-  })
 
   const queryOne = {
     name: "add-container",
     text: 'INSERT INTO containers VALUES ($1, $2, $3, $4) RETURNING *',
-    values: [containerNumber, sealNumber, formatedContent, date]
+    values: [containerNumber, sealNumber, containerContent, date]
   }
 
   db.query(queryOne)
     .then(({rows}) => {
       console.log('AFTER QUERY: ', rows)
 
-      recallIds.forEach((id) => {
+      usedCodes.forEach((id) => {
         
         const queryTwo = {
           name: "cleanup-stacks",
@@ -32,11 +26,11 @@ function addContainer(req, res, next){
           .catch((error) => console.error(error))
 
       })
-      res.status(200).send(rows)
+      res.status(200).send(rows[0])
 
     })
     .catch((error) => console.error(error))
-    .finally(() => makeCurrentCodesJSON())
+    
 }
 
 module.exports = { addContainer }

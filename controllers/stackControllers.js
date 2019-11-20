@@ -1,4 +1,3 @@
-const currentCodes = require('../currentCodes.json')
 const db = require('../db/index.js')
 const { formatDBContent } = require('../spec/util.js')
 
