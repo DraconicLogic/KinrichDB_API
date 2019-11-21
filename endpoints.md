@@ -1,8 +1,4 @@
-# NnennaTextilesAPI
-
-## Overview
-
-This API is intended to be the backend to a suite of Nnenna Textiles applications. All the endpoints will return JSON encoded data. The hope is that this will optimize some of the workflows that we have implemented at Nnenna Textiles.
+## Nnenna Textiles API
 
 ## Getting started
 
@@ -11,3 +7,15 @@ The current version of the API currently exists at `http://host/api`. Just appen
 `/stacks` Depending on the the http request returns data about stacks that have been strapped
 
 `/container` Deals with data about Containers that have been loaded.
+
+## Endpoints
+
+GET: `/stacks` Returns JSON with all the stacks currently in the database
+
+POST: `/stacks` When provided JSON
+
+DELETE: `/stacks`
+
+GET: `/containers`
+
+POST: `/containers`
