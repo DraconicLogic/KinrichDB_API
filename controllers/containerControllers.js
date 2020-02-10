@@ -1,36 +1,29 @@
-const db = require('../db/index.js')
+const db = require('../db/firebase.js')
 
 function addContainer(req, res, next){  
   const { containerNumber, sealNumber, containerContent, date } = req.body
-
-  const query = {
-    name: "add-container",
-    text: 'INSERT INTO containers VALUES ($1, $2, $3, $4) RETURNING *',
-    values: [containerNumber, sealNumber, containerContent, date]
-  }
-
-  db.query(query)
-    .then(({rows}) => {
-      console.log('AFTER QUERY: ', rows)
-      res.status(201).send(rows[0])
-
-    })
-    .catch((error) => console.error(error))
-    
+  console.log('sealNumber: ', sealNumber, typeof sealNumber)
+  const docRef = db.collection('containers').doc(sealNumber)
+  docRef.set(req.body)
+  .then(() => {
+    console.log("New container added successfully")
+    res.status(201).send(req.body)
+  })
+  .catch((error) => console.error(error))  
 }
 
 function getContainers(req, res, next){
-  const query = {
-    name: "get-containers",
-    text: "SELECT * FROM containers"
-  }
-
-  db.query(query)
-    .then(({rows}) => {
-      console.log('AFTER QUERY: ', rows)
-      res.status(200).send(rows)
+  const collectionRef = db.collection('containers')
+  collectionRef.get()
+  .then((querySnapshot) => {
+    const containers = []
+    querySnapshot.forEach((doc) => {
+      const docData = doc.data()
+      containers.push(docData)
     })
-    .catch((error) => console.error(error))
+    res.status(200).send(containers)
+  })
+  .catch((error) => console.error(error))
 }
 
 module.exports = { addContainer, getContainers }

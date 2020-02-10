@@ -1,66 +1,42 @@
-const db = require('../db/index.js')
+const db = require('../db/firebase.js')
 const { formatDBContent } = require('../spec/util.js')
 
 function addStack(req, res, next){
   const { recallid, content, date } = req.body
-    
-  const query = {
-    name: 'add-stack',
-    text: "INSERT INTO stacks VALUES ($1, $2, $3) RETURNING *",
-    values: [recallid, content, date ]
-  }
 
-  db.query(query)
-    .then(({rows}) => {
-      console.log('AFTER QUERY: ', rows)
-      const stack = rows[0]
-      const formattedContent = formatDBContent(stack.content)
-      const newStack = {
-        recallid: stack.recallid,
-        content: formattedContent,
-        date: stack.date
-      }
-          res.status(201).send(newStack)
-    })
-    .catch((error) => console.error(error))
+  const docRef = db.collection('stacks').doc(recallid);
+  docRef.set(req.body)
+  .then(() => {
+    console.log('New stack added successfully')
+    res.status(201).send(req.body)
+  })
+  . catch((error) => console.error(error))
 }
 
 function getStacks(req, res, next){
-  const query = {
-    name: 'get-stacks',
-    text: 'SELECT * FROM stacks'
-  }
-
-  db.query(query)
-    .then(({rows}) => {
-      console.log('AFTER QUERY: ', rows)
-      const formattedStacks = rows.map((stack) => {
-        const {recallid, content} = stack
-        const formattedContent = formatDBContent(content)
-        const newStack = {
-          recallid,
-          content: formattedContent
-        }
-        return newStack
+  const collectionRef =  db.collection('stacks')
+  collectionRef.get()
+    .then((querySnapshot) => {
+      const stacks = []
+      querySnapshot.forEach((doc) => {
+        const docData = doc.data()
+        stacks.push(docData)
       })
-      console.log('FORMATTED STACKS: ', formattedStacks)
-      res.status(200).send(formattedStacks)
+      res.status(200).send(stacks)
     })
     .catch((error) => console.error(error))
 }
 
 function removeStacksByRecallid(req, res, next){
-  const {usedCodes} = req.body
-  usedCodes.forEach((recallid) => {
-    const query = {
-      name: "cleanup-stacks",
-      text: `DELETE FROM stacks WHERE recallid = ${recallid}::text`
-    }
-    
-    db.query(query)
-    .finally(() => res.status(204))
-    .catch((error) => console.error(error))
-  })
+    const {usedCodes} = req.body
+    const collectionRef = db.collection('stacks')
+    usedCodes.forEach((recallid) => {
+      collectionRef.doc(recallid).delete()
+      .then(() => {
+        console.log(`${recallid} deleted succesfully`)
+      })
+      .catch((error) => console.error(error))
+    })
 }
 
 module.exports = {addStack, getStacks, removeStacksByRecallid}
