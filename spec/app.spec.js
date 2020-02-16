@@ -1,22 +1,23 @@
 const app = require('../app.js')
 const  request  = require('supertest')
+console.log('PROCESS ENV', process.env)
 
 
 describe('Nnenna Textiles API',() => {
-  describe('Connection to database', () => {
-    it('Sends a valid query to valid database', () => {
-        
+  describe("GET /stacks", () => {
+    it("Returns a list of all the stacks currently saved in the databse",() => {
       request(app)
-        .get('/test')
-        .expect((res) => {
-          console.log(res)
-          expect(res).toBe()
-        })
+        .get('/api/stacks')
+        .expect(201)
+        .then((response) => console.log(response))
 
-        // .then((res) => {
-        //   console.log(res)
-        //   expect(res).toBe('Nnenna_Database_test')
+        // .expect('Content-Type', /json/)
+        // .end((err, res) => {
+        //   if (err) throw err
         // })
+        
+        
+        
     })
   })
 })
