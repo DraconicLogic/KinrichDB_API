@@ -1,6 +1,9 @@
+require('custom-env').env('testing')
 const app = require('../app.js')
 const  request  = require('supertest')
-console.log('PROCESS ENV', process.env)
+console.log('TEST SUITE')
+console.log('PROCESS ENV', process.env.NODE_ENV)
+console.log('DB_URL', process.env.DB_URL)
 
 
 describe('Nnenna Textiles API',() => {
