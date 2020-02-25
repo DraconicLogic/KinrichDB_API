@@ -1,26 +1,37 @@
 require('custom-env').env('testing')
 const app = require('../app.js')
 const  request  = require('supertest')
-console.log('TEST SUITE')
-console.log('PROCESS ENV', process.env.NODE_ENV)
-console.log('DB_URL', process.env.DB_URL)
+const { seedDB } = require('../seed/seed.js')
+const stacksData = require('../seed/testData/stacks.json')
+
 
 
 describe('Nnenna Textiles API',() => {
-  describe("GET /stacks", () => {
-    it("Returns a list of all the stacks currently saved in the databse",() => {
-      request(app)
-        .get('/api/stacks')
-        .expect(201)
-        .then((response) => console.log(response))
 
-        // .expect('Content-Type', /json/)
-        // .end((err, res) => {
-        //   if (err) throw err
-        // })
-        
-        
-        
+  beforeEach(() => {
+    seedDB(stacksData).then((result) => console.log(result))
+  })
+
+  afterAll(async () => {
+    await new Promise((resolve) => {
+      return setTimeout(() => {
+        return resolve()
+      },500)})
+  })
+
+  describe("GET /stacks", () => {
+
+    const stacksUrl = '/api/stacks'
+
+    it("Returns a list of all the stacks currently saved in the databse", async (done) => {
+      return request(app)
+        .get(stacksUrl)
+        .then((response) => {
+          // console.log(response.body.data)
+          expect(response.status).toEqual(200)
+          expect(Object.entries(response.body.docs).length).toEqual(5)
+          done()
+        })
     })
   })
 })

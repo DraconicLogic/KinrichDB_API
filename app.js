@@ -2,15 +2,13 @@ require('custom-env').env()
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-const testRouter = require('./routes/test.js')
 const apiRouter = require('./routes/api.js')
 const cors = require('cors')
-const MongoClient = require('mongodb').MongoClient;
-console.log('MAIN APP')
-console.log('PROCESS ENV',process.env.NODE_ENV)
-console.log('DB_URL', process.env.DB_URL)
 
-const uri = 'mongodb://localhost:27017'
+
+
+
+
 
 // const client = new MongoClient(uri, {useNewUrlParser: true})
 // client.connect((err) => {

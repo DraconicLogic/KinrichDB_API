@@ -11,8 +11,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --watch spec",
-    "recall": "node ./recall_id_generator",
+    "test": "jest --forceExit",
+    "test:watch": "jest --watch spec",
     "seed": "node ./seed/seed.env.js"
   },
   "repository": {
