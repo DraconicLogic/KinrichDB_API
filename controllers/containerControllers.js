@@ -2,11 +2,11 @@ const db = require('../db/firebase.js')
 
 function addContainer(req, res, next){  
   const { containerNumber, sealNumber, containerContent, date } = req.body
-  console.log('sealNumber: ', sealNumber, typeof sealNumber)
+  
   const docRef = db.collection('containers').doc(sealNumber)
   docRef.set(req.body)
   .then(() => {
-    console.log("New container added successfully")
+    
     res.status(201).send(req.body)
   })
   .catch((error) => console.error(error))  

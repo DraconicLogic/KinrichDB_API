@@ -6,7 +6,9 @@ const stacksData = require("./testData/stacks.json")
 
   seedDB(stacksData)
   .then((result) => {
-    console.log(result)
+    console.info('DATABASE SEEDED SUCCESSFULLY')
+    return result
+    
   })
   .catch(console.error)
   
