@@ -12,6 +12,7 @@ let newCreds = {
   privateKey: PRIVATE_KEY ? PRIVATE_KEY.replace(/\\n/g, '\n'): null,
   clientEmail: CLIENT_EMAIL
 }
+console.log(NODE_ENV)
 if (NODE_ENV !== 'production') {
   newCreds = require('./nnenna-textiles-firebase-adminsdk-e6e1y-6201c988e2.json')
 }
