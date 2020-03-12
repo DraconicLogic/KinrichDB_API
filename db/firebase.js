@@ -14,9 +14,12 @@ let newCreds = {
 }
 console.log(NODE_ENV)
 if (NODE_ENV !== 'production') {
-  newCreds = require('./nnenna-textiles-firebase-adminsdk-e6e1y-6201c988e2.json')
+  newCreds = importDevCreds()
 }
 
+function importDevCreds (){
+  return require(('./nnenna-textiles-firebase-adminsdk-e6e1y-6201c988e2.json'))
+}
 
 admin.initializeApp({
   credential: admin.credential.cert(newCreds),
