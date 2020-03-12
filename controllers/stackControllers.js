@@ -1,7 +1,6 @@
-const db = require('../db/firebase.js')
 const database = require('../db/mongodb.js')()
-const { formatDBContent } = require('../spec/util.js')
-const dbCollection = 'stacks'
+
+
 
 async function addStack(req, res, next){
   console.log('ADDING STACK')
@@ -18,6 +17,7 @@ async function addStack(req, res, next){
 }
 
 async function getStacks(req, res, next){
+   console.log("GETTING STACKS")
   const cursor = await database.then((client) => {
     return client.database.collection('stacks').find()
   })
@@ -27,15 +27,10 @@ async function getStacks(req, res, next){
 }
 
 function removeStacksByRecallid(req, res, next){
+    console.log('REMOVING STACKS')
     const {usedCodes} = req.body
-    const collectionRef = db.collection('stacks')
-    usedCodes.forEach((recallid) => {
-      collectionRef.doc(recallid).delete()
-      .then(() => {
-        console.log(`${recallid} deleted succesfully`)
-      })
-      .catch((error) => console.error(error))
-    })
+    console.log(usedCodes)
+   
 }
 
 module.exports = {addStack, getStacks, removeStacksByRecallid}
