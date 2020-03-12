@@ -7,16 +7,16 @@ const {
   NODE_ENV
 } = process.env
 
-let newCreds = NODE_ENV === 'production' ? 
-{
-  projectId: PROJECT_ID,
-  privateKey: PRIVATE_KEY ? PRIVATE_KEY.replace(/\\n/g, '\n'): null,
-  clientEmail: CLIENT_EMAIL
-} : require('./nnenna-textiles-firebase-adminsdk-e6e1y-6201c988e2.json')
-
+// let newCreds = NODE_ENV === 'production' ? 
+// {
+//   projectId: PROJECT_ID,
+//   privateKey: PRIVATE_KEY ? PRIVATE_KEY.replace(/\\n/g, '\n'): null,
+//   clientEmail: CLIENT_EMAIL
+// } : require('./nnenna-textiles-firebase-adminsdk-e6e1y-6201c988e2.json')
+console.log('DB URL: ', DB_URL)
 
 admin.initializeApp({
-  credential: admin.credential.cert(newCreds),
+  credential: admin.credential.applicationDefault(),
   databaseURL: DB_URL
 });
 
