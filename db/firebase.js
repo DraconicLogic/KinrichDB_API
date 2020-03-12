@@ -7,19 +7,13 @@ const {
   NODE_ENV
 } = process.env
 
-let newCreds = {
+let newCreds = NODE_ENV === 'production' ? 
+{
   projectId: PROJECT_ID,
   privateKey: PRIVATE_KEY ? PRIVATE_KEY.replace(/\\n/g, '\n'): null,
   clientEmail: CLIENT_EMAIL
-}
-console.log(NODE_ENV)
-if (NODE_ENV !== 'production') {
-  newCreds = importDevCreds()
-}
+} : require('./nnenna-textiles-firebase-adminsdk-e6e1y-6201c988e2.json')
 
-function importDevCreds (){
-  return require(('./nnenna-textiles-firebase-adminsdk-e6e1y-6201c988e2.json'))
-}
 
 admin.initializeApp({
   credential: admin.credential.cert(newCreds),
