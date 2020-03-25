@@ -3,17 +3,8 @@ const StackModel = require('../models/stackModels')
 
 
 async function addStack(req, res, next){
-  // console.log('ADDING STACK')
-  // const { recallid, content, date } = req.body
-  // const cursor = await database.then((client) => {
-  //   return client.database.collection('stacks').insertOne(req.body)
-  // })
-  // .catch(console.error)
-  // console.log(Object.keys(cursor.ops))
-
-  // const doc = await cursor.result()
-  // res.status(201).send({doc})
-
+  const addedStack = await StackModel.create(req.body)
+  res.status(201).send({addedStack})
 }
 
 async function getStacks(req, res, next){

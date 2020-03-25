@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const stackSchema = new Schema({
-  stackid: 'string',
+  stackId: 'string',
   content: ['string'],
   date: 'string'
 })

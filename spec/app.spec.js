@@ -54,20 +54,19 @@ describe('Nnenna Textiles API',() => {
     })
     describe("POST /stacks", () => {
       
-      const newData = JSON.stringify({
-        recallid: '496',
+      const newData = {
+        stackId: '496',
         content: ['ATS', 'ATS', 'ATS', 'LTS', 'LTS', 'LTS', 'LTSH', 'LTSH', 'LTSH', 'AC', 'AC', 'AC'],
         date: '25-2-20'
-      })
+      }
 
       it("Add a new stack to the database", async (done) => {
-        // console.log(newData)
         return request(app)
           .post(stacksUrl)
           .send(newData)
           .then((res) => {
-            console.log(res.body) 
-            expect(res.status).toEqual(200)
+            expect(res.status).toEqual(201)
+            expect(res.body.addedStack.stackId).toEqual(newData.stackId)
             done()
           })
       })
