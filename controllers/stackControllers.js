@@ -17,17 +17,15 @@ async function addStack(req, res, next){
 }
 
 async function getStacks(req, res, next){
-  console.log("GETTING STACKS")
   const stacks = await StackModel.find({})
-  
   res.status(200).send({stacks})
 }
 
-function removeStacksByRecallid(req, res, next){
+function removeStacksById(req, res, next){
     console.log('REMOVING STACKS')
     const {usedCodes} = req.body
     console.log(usedCodes)
    
 }
 
-module.exports = {addStack, getStacks, removeStacksByRecallid}
+module.exports = {addStack, getStacks, removeStacksById}
