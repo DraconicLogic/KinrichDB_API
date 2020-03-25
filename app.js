@@ -7,10 +7,10 @@ const apiRouter = require('./routes/api.js')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-mongoose.connect(`${DB_HOST}${DB_NAME}`, {useNewUrlParser: true})
+mongoose.connect(`${DB_HOST}${DB_NAME}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
   console.log(`Successfully connected to ${DB_NAME}`)
-})
+}) 
 .catch(console.error)
 
 app.use(cors())
