@@ -7,9 +7,13 @@ const stacksData = require('../seed/testData/stacks.json')
 
 
 describe('Nnenna Textiles API',() => {
+  let seedResults;
 
   beforeEach(() => {
-    seedDB(stacksData).then((result) => console.log(result))
+    return seedDB(stacksData).then((result) => {
+      return seedResults = result
+    })
+    
   })
 
   afterAll(async () => {
@@ -24,23 +28,22 @@ describe('Nnenna Textiles API',() => {
     const stacksUrl = '/api/stacks'
 
     describe("GET /stacks", () => {
-      it("Returns all five entries in the database", async (done) => {
+      it("Returns same number of entries seeded", async (done) => {
         return request(app)
           .get(stacksUrl)
           .then((response) => {
-            console.log(response.body)
             expect(response.status).toEqual(200)
-            expect(Object.entries(response.body.docs)).toHaveLength(5)
+            expect(response.body.stacks).toHaveLength(seedResults.length)
             done()
           })
       })
-      it("Returns Genuine MongoDB entries", async (done) => {
+      it("Returns Genuine DB entries", async (done) => {
         return request(app)
           .get(stacksUrl)
           .then((response) => {
             expect(response.status).toEqual(200)
-            console.log(Object.values(response.body.docs))
-            expect(response.body.docs).toHaveProperty("_id")
+            console.log(Object.values(response.body.stacks))
+            expect(response.body.stacks).toHaveProperty("_id")
             done()
           })
       })
@@ -54,7 +57,7 @@ describe('Nnenna Textiles API',() => {
       })
 
       it("Add a new stack to the database", async (done) => {
-        console.log(newData)
+        // console.log(newData)
         return request(app)
           .post(stacksUrl)
           .send(newData)
