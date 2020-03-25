@@ -24,17 +24,26 @@ describe('Nnenna Textiles API',() => {
     const stacksUrl = '/api/stacks'
 
     describe("GET /stacks", () => {
-      it("Returns all five entries in the databse", async (done) => {
+      it("Returns all five entries in the database", async (done) => {
         return request(app)
           .get(stacksUrl)
           .then((response) => {
             console.log(response.body)
             expect(response.status).toEqual(200)
-            expect(Object.entries(response.body.docs).length).toEqual(5)
+            expect(Object.entries(response.body.docs)).toHaveLength(5)
             done()
           })
       })
-      it("Returns MongoDB entri")
+      it("Returns Genuine MongoDB entries", async (done) => {
+        return request(app)
+          .get(stacksUrl)
+          .then((response) => {
+            expect(response.status).toEqual(200)
+            console.log(Object.values(response.body.docs))
+            expect(response.body.docs).toHaveProperty("_id")
+            done()
+          })
+      })
     })
     describe("POST /stacks", () => {
       

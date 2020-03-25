@@ -1,5 +1,5 @@
-const database = require('../db/mongodb.js')()
 
+const StackModel = require('../models/stackModels')
 
 
 async function addStack(req, res, next){
@@ -17,13 +17,10 @@ async function addStack(req, res, next){
 }
 
 async function getStacks(req, res, next){
-   console.log("GETTING STACKS")
-  const cursor = await database.then((client) => {
-    return client.database.collection('stacks').find()
-  })
-  .catch(console.error)
-  const docs = await cursor.toArray()
-  res.status(200).send({docs})
+  console.log("GETTING STACKS")
+  const stacks = await StackModel.find({})
+  
+  res.status(200).send({stacks})
 }
 
 function removeStacksByRecallid(req, res, next){

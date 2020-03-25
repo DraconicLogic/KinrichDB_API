@@ -7,10 +7,8 @@ const seedDB = async (data) => {
   
   return database.then(async (client) => {
     const dbDropped = await client.database.dropDatabase()
-    console.log(dbDropped)
-    const collections = await client.database.listCollections()
-    console.log(collections)
-    if (dbDropped ) {
+    if (dbDropped) {
+      console.log('Dropping Database')
       return client.database.collection('stacks')
     }
   })
