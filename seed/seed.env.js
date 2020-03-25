@@ -8,21 +8,16 @@ const stacksData = require("./testData/stacks.json")
 mongoose.connect(`${DB_HOST}${DB_NAME}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
   console.log(`Ready to seed ${DB_NAME}`)
-  seedDB(stacksData)
+  return seedDB(stacksData)
     .then((result) => {
-      console.info('DATABASE SEEDED SUCCESSFULLY', result)
-      
-      return result
-      
+      console.log('Database seeded succesfully')
+      return result 
     })
-
 })
 .catch(console.error)
-// .finally(() => {
-//   mongoose.disconnect(() => console.log('Closing DB connection'))
-
-
-// })
+.finally(() => {
+  mongoose.disconnect(() => console.log('Closing DB connection'))
+})
 
   
 
