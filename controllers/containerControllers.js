@@ -10,4 +10,4 @@ function getContainers(req, res, next){
 
 function getContainerById(req,res, next){}
 
-module.exports = { addContainer, getContainers }
+module.exports = { addContainer, getContainers, getContainerById }
