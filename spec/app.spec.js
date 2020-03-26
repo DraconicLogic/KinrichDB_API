@@ -60,7 +60,7 @@ describe('Nnenna Textiles API',() => {
         date: '25-2-20'
       }
 
-      it("Add a new stack to the database", async (done) => {
+      it("Retrieves newly added stack", async (done) => {
         return request(app)
           .post(stacksUrl)
           .send(newData)
@@ -70,8 +70,47 @@ describe('Nnenna Textiles API',() => {
             done()
           })
       })
+      it.skip('Checks that number of Items in DB larger by one item', () => {})
     })
+    describe('DELETE /stacks', () => {
+      it('Checks that number of stack has reduced', async(done) => {
+        const usedCodes = ['789']
 
+        return request(app)
+        .delete(stacksUrl)
+        .send({usedCodes})
+        .then((firstResponse) => {
+          expect(firstResponse.status).toEqual(200)
+          return request(app)
+          .get(stacksUrl)
+          .then((secondResponse) => {
+            expect(secondResponse.status).toEqual(200)
+            expect(secondResponse.body.stacks.length)
+            .toEqual(seedResults.length - 1)
+            done()
+
+          })
+        })
+      })
+      it('Removes multiple stacks', async (done) => {
+        const usedCodes = ['123', '321']
+        return request(app)
+        .delete(stacksUrl)
+        .send({usedCodes})
+        .then((firstResponse) => {
+          expect(firstResponse.status).toEqual(200)
+          return request(app)
+          .get(stacksUrl)
+          .then((secondResponse) => {
+            expect(secondResponse.status).toEqual(200)
+            expect(secondResponse.body.stacks.length)
+            .toEqual(seedResults.length - 2)
+            done()
+
+          })
+        })
+      })
+    })
   })
 
 })
