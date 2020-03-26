@@ -106,7 +106,7 @@ describe('Nnenna Textiles API',() => {
             expect(secondResponse.body.stacks.length)
             .toEqual(seedResults.length - 2)
             done()
-
+            
           })
         })
       })
