@@ -41,13 +41,12 @@ describe('Nnenna Textiles API',() => {
             done()
           })
       })
-      it.skip("Returns Genuine DB entries", async (done) => {
+      it("Returns Genuine DB entries", async (done) => {
         return request(app)
           .get(stacksUrl)
           .then((response) => {
             expect(response.status).toEqual(200)
-            console.log(Object.values(response.body.stacks))
-            expect(response.body.stacks).toHaveProperty("_id")
+            expect(response.body.stacks[0]).toHaveProperty("_id")
             done()
           })
       })
