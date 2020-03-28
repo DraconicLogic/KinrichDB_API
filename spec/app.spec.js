@@ -31,10 +31,7 @@ describe('Nnenna Textiles API',() => {
   })
 
   describe("/stacks Endpoints", () => {
-
     const stacksUrl = '/api/stacks'
-    
-
     describe("GET /stacks", () => {
       it("Returns same number of entries seeded", async (done) => {
         const seededStacks = seedResults.addedStacks
@@ -117,5 +114,36 @@ describe('Nnenna Textiles API',() => {
       })
     })
   })
-
+  describe.only("/containers endpoints", () => {
+    const containersUrl = '/api/containers'
+    describe('GET /containers', () => {
+      it('Return same number of entries seeded', async(done) => {
+        const seededContainers = seedResults.addedContainers
+        return request(app)
+        .get(containersUrl)
+        .then((response) => {
+          expect(response.status).toEqual(200)
+          expect(response.body.containers).toHaveLength(seededContainers.length)
+          done()
+        })
+      })
+    })
+    describe('POST /containers',() => {
+      const newData = require('../seed/testData/container_to_add.json')
+      it('Checks that number of containers in DB has grown by one item', async () => {
+        const seededContainers = seedResults.addedContainers
+        return request(app)
+        .post(containersUrl)
+        .send(newData)
+        .then((firstResponse) => {
+          expect(firstResponse.status).toEqual(201)
+          return request(app)
+          .get(containersUrl)
+          .then((secondResponse) => {
+            expect(secondResponse.body.containers).toHaveLength(seededContainers.length + 1)
+          })
+        })
+      })
+    })
+  })
 })
