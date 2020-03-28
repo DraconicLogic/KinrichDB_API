@@ -6,15 +6,18 @@ require('custom-env').env('testing')
 const app = require('../app.js')
 const  request  = require('supertest')
 const { seedDB } = require('../seed/seed.js')
-const stacksData = require('../seed/testData/stacks.json')
+const stackData = require('../seed/testData/stacks.json')
+const containerData = require('../seed/testData/containers.json')
 
 
 
 describe('Nnenna Textiles API',() => {
-  let seedResults;
+  let seedResults
+  
 
   beforeEach(() => {
-    return seedDB(stacksData).then((result) => {
+    return seedDB({stackData, containerData})
+    .then((result) => {
       return seedResults = result
     })
     
@@ -30,14 +33,16 @@ describe('Nnenna Textiles API',() => {
   describe("/stacks Endpoints", () => {
 
     const stacksUrl = '/api/stacks'
+    
 
     describe("GET /stacks", () => {
       it("Returns same number of entries seeded", async (done) => {
+        const seededStacks = seedResults.addedStacks
         return request(app)
           .get(stacksUrl)
           .then((response) => {
             expect(response.status).toEqual(200)
-            expect(response.body.stacks).toHaveLength(seedResults.length)
+            expect(response.body.stacks).toHaveLength(seededStacks.length)
             done()
           })
       })
@@ -74,7 +79,7 @@ describe('Nnenna Textiles API',() => {
     describe('DELETE /stacks', () => {
       it('Checks that number of stack has reduced', async(done) => {
         const usedCodes = ['789']
-
+        const seededStacks = seedResults.addedStacks
         return request(app)
         .delete(stacksUrl)
         .send({usedCodes})
@@ -85,7 +90,7 @@ describe('Nnenna Textiles API',() => {
           .then((secondResponse) => {
             expect(secondResponse.status).toEqual(200)
             expect(secondResponse.body.stacks.length)
-            .toEqual(seedResults.length - 1)
+            .toEqual(seededStacks.length - 1)
             done()
 
           })
@@ -93,6 +98,7 @@ describe('Nnenna Textiles API',() => {
       })
       it('Removes multiple stacks', async (done) => {
         const usedCodes = ['123', '321']
+        const seededStacks = seedResults.addedStacks
         return request(app)
         .delete(stacksUrl)
         .send({usedCodes})
@@ -103,7 +109,7 @@ describe('Nnenna Textiles API',() => {
           .then((secondResponse) => {
             expect(secondResponse.status).toEqual(200)
             expect(secondResponse.body.stacks.length)
-            .toEqual(seedResults.length - 2)
+            .toEqual(seededStacks.length - 2)
             done()
             
           })

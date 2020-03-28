@@ -2,13 +2,13 @@ require('custom-env').env()
 const mongoose = require('mongoose')
 const { DB_HOST, DB_NAME } = process.env
 const { seedDB } = require("./seed.js")
-const stacksData = require("./testData/stacks.json")
-
+const stackData = require("./testData/stacks.json")
+const containerData = require("./testData/container.json")
 
 mongoose.connect(`${DB_HOST}${DB_NAME}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
   console.log(`Ready to seed ${DB_NAME}`)
-  return seedDB(stacksData)
+  return seedDB({stackData, containerData})
     .then((result) => {
       console.log('Database seeded succesfully')
       return result 
