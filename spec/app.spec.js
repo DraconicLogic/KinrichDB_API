@@ -55,7 +55,7 @@ describe('Nnenna Textiles API',() => {
     })
     describe("POST /stacks", () => {
       
-      const newData = {
+      const newStack = {
         stackId: '496',
         content: ['ATS', 'ATS', 'ATS', 'LTS', 'LTS', 'LTS', 'LTSH', 'LTSH', 'LTSH', 'AC', 'AC', 'AC'],
         date: '25-2-20'
@@ -64,10 +64,10 @@ describe('Nnenna Textiles API',() => {
       it("Retrieves newly added stack", async (done) => {
         return request(app)
           .post(stacksUrl)
-          .send(newData)
+          .send({newStack})
           .then((res) => {
             expect(res.status).toEqual(201)
-            expect(res.body.addedStack.stackId).toEqual(newData.stackId)
+            expect(res.body.addedStack.stackId).toEqual(newStack.stackId)
             done()
           })
       })
@@ -129,12 +129,12 @@ describe('Nnenna Textiles API',() => {
       })
     })
     describe('POST /containers',() => {
-      const newData = require('../seed/testData/container_to_add.json')
+      const newContainer= require('../seed/testData/container_to_add.json')
       it('Checks that number of containers in DB has grown by one item', async () => {
         const seededContainers = seedResults.addedContainers
         return request(app)
         .post(containersUrl)
-        .send(newData)
+        .send({newContainer})
         .then((firstResponse) => {
           expect(firstResponse.status).toEqual(201)
           return request(app)
