@@ -10,6 +10,10 @@ async function getContainers(req, res, next){
   res.status(200).send({containers})
 }
 
-async function getContainerBySeal(req,res, next){}
+async function getContainerBySeal(req,res, next){
+  const {sealNumber} = req.params
+  const [container] = await ContainerModel.find({sealNumber})
+  res.status(200).send({container})
+}
 
 module.exports = { addContainer, getContainers, getContainerBySeal }
