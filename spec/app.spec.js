@@ -12,8 +12,14 @@ const containerData = require('../seed/testData/containers.json')
 
 
 describe('Nnenna Textiles API',() => {
-  let seedResults
-  
+  let seedResults;
+
+  beforeAll(() => {
+    return seedDB({stackData, containerData})
+    .then((result) => {
+      return seedResults = result
+    })
+  })
 
   beforeEach(() => {
     return seedDB({stackData, containerData})
@@ -71,7 +77,22 @@ describe('Nnenna Textiles API',() => {
             done()
           })
       })
-      it.skip('Checks that number of Items in DB larger by one item', () => {})
+      it('Checks that number of Items in DB larger by one item', async (done) => {
+        const seededStacks = seedResults.addedStacks
+        return request(app)
+        .post(stacksUrl)
+        .send({newStack})
+        .then((firstResponse) => {
+          expect(firstResponse.status).toEqual(201)
+          return request(app)
+          .get(stacksUrl)
+          .then((secondResponse) => {
+            expect(secondResponse.status).toEqual(200)
+            expect(secondResponse.body.stacks.length).toEqual(seededStacks.length + 1)
+            done()
+          })
+        })
+      })
     })
     describe('DELETE /stacks', () => {
       it('Checks that number of stack has reduced', async(done) => {
@@ -114,7 +135,7 @@ describe('Nnenna Textiles API',() => {
       })
     })
   })
-  describe.only("/containers endpoints", () => {
+  describe("/containers endpoints", () => {
     const containersUrl = '/api/containers'
     describe('GET /containers', () => {
       it('Return same number of entries seeded', async(done) => {
@@ -127,10 +148,22 @@ describe('Nnenna Textiles API',() => {
           done()
         })
       })
+      it('Returns the one container that the seal matches ', (done) => {
+        const urlSuffix = '/EU18786766'
+        return request(app)
+        .get(`${containersUrl}${urlSuffix}`)
+        .then((response) => {
+          console.log('RESPONSE FROM SERVER: ',response.body.container.sealNumber)
+          expect(response.status).toEqual(200)
+          expect(response.body.container.sealNumber).toEqual(urlSuffix.slice(1))
+          done()
+        })
+
+      })
     })
     describe('POST /containers',() => {
       const newContainer= require('../seed/testData/container_to_add.json')
-      it('Checks that number of containers in DB has grown by one item', async () => {
+      it('Checks that number of containers in DB has grown by one item', async (done) => {
         const seededContainers = seedResults.addedContainers
         return request(app)
         .post(containersUrl)
@@ -141,6 +174,7 @@ describe('Nnenna Textiles API',() => {
           .get(containersUrl)
           .then((secondResponse) => {
             expect(secondResponse.body.containers).toHaveLength(seededContainers.length + 1)
+            done()
           })
         })
       })
