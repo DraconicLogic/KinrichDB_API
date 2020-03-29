@@ -26,7 +26,6 @@ describe('Nnenna Textiles API',() => {
     .then((result) => {
       return seedResults = result
     })
-    
   })
 
   afterAll(async () => {
@@ -148,7 +147,7 @@ describe('Nnenna Textiles API',() => {
           done()
         })
       })
-      it('Returns the one container that the seal matches ', (done) => {
+      it('Returns the one container that the seal matches ', async(done) => {
         const urlSuffix = '/EU18786766'
         return request(app)
         .get(`${containersUrl}${urlSuffix}`)

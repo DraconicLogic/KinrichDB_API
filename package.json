@@ -8,6 +8,9 @@
       "currentCodes.json"
     ]
   },
+  "jest": {
+    "testTimeout": 20000
+  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
