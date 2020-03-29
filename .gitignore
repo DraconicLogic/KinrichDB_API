@@ -1,5 +1,7 @@
 node_modules
+db
 scrap.js
-queries
-mongodb.js
-nnenna-textiles-firebase-adminsdk-e6e1y-6201c988e2.json
+config
+.env
+.env.testing
+temp_dir

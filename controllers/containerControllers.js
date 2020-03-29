@@ -1,29 +1,19 @@
-const db = require('../db/firebase.js')
+const ContainerModel = require('../models/containerModels')
 
-function addContainer(req, res, next){  
-  const { containerNumber, sealNumber, containerContent, date } = req.body
-  console.log('sealNumber: ', sealNumber, typeof sealNumber)
-  const docRef = db.collection('containers').doc(sealNumber)
-  docRef.set(req.body)
-  .then(() => {
-    console.log("New container added successfully")
-    res.status(201).send(req.body)
-  })
-  .catch((error) => console.error(error))  
+async function addContainer(req, res, next){  
+  const addedContainer = await ContainerModel.create(req.body.newContainer)
+  res.status(201).send({addedContainer})
 }
 
-function getContainers(req, res, next){
-  const collectionRef = db.collection('containers')
-  collectionRef.get()
-  .then((querySnapshot) => {
-    const containers = []
-    querySnapshot.forEach((doc) => {
-      const docData = doc.data()
-      containers.push(docData)
-    })
-    res.status(200).send(containers)
-  })
-  .catch((error) => console.error(error))
+async function getContainers(req, res, next){
+  const containers =  await ContainerModel.find({})
+  res.status(200).send({containers})
 }
 
-module.exports = { addContainer, getContainers }
+async function getContainerBySeal(req,res, next){
+  const {sealNumber} = req.params
+  const [container] = await ContainerModel.find({sealNumber})
+  res.status(200).send({container})
+}
+
+module.exports = { addContainer, getContainers, getContainerBySeal }

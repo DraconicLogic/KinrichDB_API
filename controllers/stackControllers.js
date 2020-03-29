@@ -1,42 +1,32 @@
-const db = require('../db/firebase.js')
-const { formatDBContent } = require('../spec/util.js')
+const StackModel = require('../models/stackModels')
 
-function addStack(req, res, next){
-  const { recallid, content, date } = req.body
 
-  const docRef = db.collection('stacks').doc(recallid);
-  docRef.set(req.body)
-  .then(() => {
-    console.log('New stack added successfully')
-    res.status(201).send(req.body)
-  })
-  . catch((error) => console.error(error))
+async function addStack(req, res, next){
+  const addedStack = await StackModel.create(req.body.newStack)
+  res.status(201).send({addedStack})
 }
 
-function getStacks(req, res, next){
-  const collectionRef =  db.collection('stacks')
-  collectionRef.get()
-    .then((querySnapshot) => {
-      const stacks = []
-      querySnapshot.forEach((doc) => {
-        const docData = doc.data()
-        stacks.push(docData)
-      })
-      res.status(200).send(stacks)
+async function getStacks(req, res, next){
+  const stacks = await StackModel.find({})
+  res.status(200).send({stacks})
+}
+
+async function removeStacksById(req, res, next){
+  const {usedCodes} = req.body 
+  let deleteReport
+  if (usedCodes.length === 1) {
+    deleteReport = 
+    await StackModel.deleteOne({stackId:usedCodes[0]})
+  }
+  if (usedCodes.length > 1) {
+    deleteReport = 
+    await StackModel.deleteMany({
+      stackId: {
+        $in: usedCodes
+      }
     })
-    .catch((error) => console.error(error))
+  }
+  res.status(200).send({deleteReport})
 }
 
-function removeStacksByRecallid(req, res, next){
-    const {usedCodes} = req.body
-    const collectionRef = db.collection('stacks')
-    usedCodes.forEach((recallid) => {
-      collectionRef.doc(recallid).delete()
-      .then(() => {
-        console.log(`${recallid} deleted succesfully`)
-      })
-      .catch((error) => console.error(error))
-    })
-}
-
-module.exports = {addStack, getStacks, removeStacksByRecallid}
+module.exports = {addStack, getStacks, removeStacksById}

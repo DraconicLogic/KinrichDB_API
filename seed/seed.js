@@ -1,25 +1,22 @@
-const db = require('../db/index.js')
-const { makeCurrentCodesJSON } = require('../recall_id_generator.js')
+const mongoose = require('mongoose')
+const StackModel = require('../models/stackModels')
+const ContainerModel = require('../models/containerModels')
 
-const seedDB = (stacks) => {
-  return db.query("DELETE FROM stacks")
-  .then(() => {
-    return stacks.map((stack) => {
-      const { recallId, content, date } = stack
-      console.log('RECALL ID TYPE DURING SEEDING: ', typeof recallId)
-      const query = {
-        text: 'INSERT INTO stacks VALUES ($1, $2, $3) RETURNING *',
-        values: [recallId, content, date]
-      }
-      db.query(query)
-      .then((result) => {
-      makeCurrentCodesJSON()
-      console.info('SEEDING COMPLETED')
-      return result
-      })
-    })
-  })
-  .catch((error) => console.error('OUTER CATCH', error))
+const seedDB = async ({stackData,  containerData}) => {
+  const dbDropped = 
+  await mongoose.connection.dropDatabase()
+
+  let addedStacks;
+  let addedContainers;
+
+  if (dbDropped) {
+    addedStacks = 
+    await StackModel.insertMany(stackData)
+    addedContainers =
+    await ContainerModel.insertMany(containerData)
+  }
+
+  return {addedStacks, addedContainers}
 }
 
 module.exports = { seedDB }
