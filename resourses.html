@@ -21,7 +21,7 @@
         GET - Returns an object with the array of stack objects as the only
         value.
         <pre>
-        <code>
+          <code>
           {
             "stacks": [
               {
@@ -36,8 +36,8 @@
               }
             ]
           }
-        </code>
-    </pre>
+          </code>
+        </pre>
       </li>
       <li>
         POST - Creates new stack object based on newStack object recieved and
@@ -47,19 +47,43 @@
         When sending a request to this endpoint your object should have one
         entry with the key: "newStack". The value should be and object with the
         following values: stackId: string content: array of strings date: string
-
-        <h4>Example</h4>
         <pre>
-        <code>
+          <code>
           {
             newStack: {
               stackId: '123',
               content: ['MCP', 'MCP', 'MCP'],
-              date: 'string'
+              date: '10-09-19'
             }
           }
-        </code>
-      </pre>
+          </code>
+        </pre>
+        <h4>Response from server</h4>
+        The object sent back from the server will have a single value a
+        'createdStack' object.
+        <pre>
+          <code>
+          {
+            "createdStack": {
+                "content": [
+                    "MCP",
+                    "MCP",
+                    "MCP"
+                ],
+                "_id": "5e874fb47c7c27037cb90968",
+                "date": "10-09-19",
+                "stackId": "123",
+                "__v": 0
+            }
+        }
+          </code>
+        </pre>
+      </li>
+      <li>
+        DELETE - Returns Report object detailing the number of entries deleted
+
+        <h4>Sending Request</h4>
+        When sending a request to this endpoint your object should have on
       </li>
     </ul>
   </body>

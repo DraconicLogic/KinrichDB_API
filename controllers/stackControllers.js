@@ -1,9 +1,8 @@
 const StackModel = require('../models/stackModels')
 
 
-async function addStack(req, res, next){
+async function createStack(req, res, next){
   const createdStack = await StackModel.create(req.body.newStack)
-  console.log(createdStack)
   res.status(201).send({createdStack})
 }
 
@@ -30,4 +29,4 @@ async function removeStacksById(req, res, next){
   res.status(200).send({deleteReport})
 }
 
-module.exports = {addStack, getStacks, removeStacksById}
+module.exports = {createStack, getStacks, removeStacksById}

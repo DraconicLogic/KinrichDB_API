@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const { DB_HOST, DB_NAME } = process.env
 const { seedDB } = require("./seed.js")
 const stackData = require("./testData/stacks.json")
-const containerData = require("./testData/container.json")
+const containerData = require("./testData/containers.json")
 
 mongoose.connect(`${DB_HOST}${DB_NAME}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {

@@ -1,11 +1,9 @@
 const stackRouter = require('express').Router()
-const {addStack, getStacks, removeStacksById} = require('../controllers/stackControllers.js')
-
+const {createStack, getStacks, removeStacksById} = require('../controllers/stackControllers.js')
 
 stackRouter.route('/')
   .get(getStacks)
-  .post(addStack)
+  .post(createStack)
   .delete(removeStacksById)
-
 
 module.exports = stackRouter
