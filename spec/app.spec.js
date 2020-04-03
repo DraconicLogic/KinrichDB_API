@@ -39,7 +39,7 @@ describe('Nnenna Textiles API',() => {
     const stacksUrl = '/api/stacks'
     describe("GET /stacks", () => {
       it("Returns same number of entries seeded", async (done) => {
-        const seededStacks = seedResults.addedStacks
+        const seededStacks = seedResults.createdStacks
         return request(app)
           .get(stacksUrl)
           .then((response) => {
@@ -72,12 +72,12 @@ describe('Nnenna Textiles API',() => {
           .send({newStack})
           .then((res) => {
             expect(res.status).toEqual(201)
-            expect(res.body.addedStack.stackId).toEqual(newStack.stackId)
+            expect(res.body.createdStack.stackId).toEqual(newStack.stackId)
             done()
           })
       })
       it('Checks that number of Items in DB larger by one item', async (done) => {
-        const seededStacks = seedResults.addedStacks
+        const seededStacks = seedResults.createdStacks
         return request(app)
         .post(stacksUrl)
         .send({newStack})
@@ -96,7 +96,7 @@ describe('Nnenna Textiles API',() => {
     describe('DELETE /stacks', () => {
       it('Checks that number of stack has reduced', async(done) => {
         const usedCodes = ['789']
-        const seededStacks = seedResults.addedStacks
+        const seededStacks = seedResults.createdStacks
         return request(app)
         .delete(stacksUrl)
         .send({usedCodes})
@@ -115,7 +115,7 @@ describe('Nnenna Textiles API',() => {
       })
       it('Removes multiple stacks', async (done) => {
         const usedCodes = ['123', '321']
-        const seededStacks = seedResults.addedStacks
+        const seededStacks = seedResults.createdStacks
         return request(app)
         .delete(stacksUrl)
         .send({usedCodes})

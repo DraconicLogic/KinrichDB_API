@@ -2,8 +2,9 @@ const StackModel = require('../models/stackModels')
 
 
 async function addStack(req, res, next){
-  const addedStack = await StackModel.create(req.body.newStack)
-  res.status(201).send({addedStack})
+  const createdStack = await StackModel.create(req.body.newStack)
+  console.log(createdStack)
+  res.status(201).send({createdStack})
 }
 
 async function getStacks(req, res, next){

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTL-API: Resources</title>
+  </head>
+
+  <body>
+    <h1>NTL-API: Resources</h1>
+    <h2>Stacks</h2>
+    <p>
+      Stack Objects represent 3 or more bales that are straped up and ready to
+      load.
+    </p>
+    <p>New stacks are created in the Loading Assistant app.</p>
+
+    <h3>Endpoints</h3>
+    <ul>
+      <li>
+        GET - Returns an object with the array of stack objects as the only
+        value.
+        <pre>
+        <code>
+          {
+            "stacks": [
+              {
+                "content": [
+                  "LMP",
+                  "LMP",
+                  "LMP"
+                ],
+                "_id": "5e7bca786ffe312ff6ab8527",
+                "date": "10-10-19",
+                "__v": 0
+              }
+            ]
+          }
+        </code>
+    </pre>
+      </li>
+      <li>
+        POST - Creates new stack object based on newStack object recieved and
+        returns it to client
+
+        <h4>Sending Request</h4>
+        When sending a request to this endpoint your object should have one
+        entry with the key: "newStack". The value should be and object with the
+        following values: stackId: string content: array of strings date: string
+
+        <h4>Example</h4>
+        <pre>
+        <code>
+          {
+            newStack: {
+              stackId: '123',
+              content: ['MCP', 'MCP', 'MCP'],
+              date: 'string'
+            }
+          }
+        </code>
+      </pre>
+      </li>
+    </ul>
+  </body>
+</html>
