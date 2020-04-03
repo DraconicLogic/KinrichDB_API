@@ -14,7 +14,6 @@
       load.
     </p>
     <p>New stacks are created in the Loading Assistant app.</p>
-
     <h3>Endpoints</h3>
     <ul>
       <li>
@@ -83,8 +82,47 @@
         DELETE - Returns Report object detailing the number of entries deleted
 
         <h4>Sending Request</h4>
-        When sending a request to this endpoint your object should have on
+        When sending a request to this endpoint your object should have one
+        entry with the key usedCodes. The value should be an array of stackIDs
+        <pre>
+          <code>
+            {
+              usedCodes: ['123']
+            }
+          </code>
+        </pre>
+        <h4>Response from server</h4>
+        The object sent back should have a report of the number of items deleted
+        keyed with "deleteReport" and a list of stackIds that were deleted keyed
+        with "deletedIds"
+        <pre>
+          <code>
+            {
+              "deleteReport": {
+                  "n": 1,
+                  "ok": 1,
+                  "deletedCount": 1
+              },
+              "deletedIds": [
+                  "123"
+              ]
+          }
+          </code>
+        </pre>
       </li>
+    </ul>
+
+    <h2>Containers</h2>
+    <p>
+      Container Object represent a container thats being successfully loaded and
+      sealed
+    </p>
+    <p>New Containers are created in the Loading Assistant app</p>
+    <h3>Endpoints</h3>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
     </ul>
   </body>
 </html>

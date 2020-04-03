@@ -26,7 +26,7 @@ async function removeStacksById(req, res, next){
       }
     })
   }
-  res.status(200).send({deleteReport})
+  res.status(200).send({deleteReport, deletedIds: usedCodes})
 }
 
 module.exports = {createStack, getStacks, removeStacksById}
