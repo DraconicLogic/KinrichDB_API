@@ -1,8 +1,0 @@
-{
-  "development": {
-    "config_id": "development",
-    "database": "ntl_api_test"
-
-  }
-
-}

@@ -1,7 +1,5 @@
 node_modules
-db
 scrap.js
-config
 .env
 .env.testing
-temp_dir
+
