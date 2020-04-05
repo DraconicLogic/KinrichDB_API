@@ -1,9 +1,9 @@
 const containerRouter = require('express').Router()
-const {addContainer, getContainers, getContainerBySeal} = require('../controllers/containerControllers.js')
+const {createContainer, getContainers, getContainerBySeal} = require('../controllers/containerControllers.js')
 
 containerRouter.route('/')
   .get(getContainers)
-  .post(addContainer)
+  .post(createContainer)
 
 containerRouter.route('/:sealNumber')
   .get(getContainerBySeal)

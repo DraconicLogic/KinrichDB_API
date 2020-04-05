@@ -135,10 +135,10 @@ describe('Nnenna Textiles API',() => {
     })
   })
   describe("/containers endpoints", () => {
-    const containersUrl = '/api/containers'
+    const containersUrl = '/api/containers/'
     describe('GET /containers', () => {
       it('Return same number of entries seeded', async(done) => {
-        const seededContainers = seedResults.addedContainers
+        const seededContainers = seedResults.createdContainers
         return request(app)
         .get(containersUrl)
         .then((response) => {
@@ -148,13 +148,12 @@ describe('Nnenna Textiles API',() => {
         })
       })
       it('Returns the one container that the seal matches ', async(done) => {
-        const urlSuffix = '/EU18786766'
+        const urlSuffix = 'EU18786766'
         return request(app)
         .get(`${containersUrl}${urlSuffix}`)
         .then((response) => {
-          console.log('RESPONSE FROM SERVER: ',response.body.container.sealNumber)
           expect(response.status).toEqual(200)
-          expect(response.body.container.sealNumber).toEqual(urlSuffix.slice(1))
+          expect(response.body[urlSuffix].sealNumber).toEqual(urlSuffix)
           done()
         })
 
@@ -163,7 +162,7 @@ describe('Nnenna Textiles API',() => {
     describe('POST /containers',() => {
       const newContainer= require('../seed/testData/container_to_add.json')
       it('Checks that number of containers in DB has grown by one item', async (done) => {
-        const seededContainers = seedResults.addedContainers
+        const seededContainers = seedResults.createdContainers
         return request(app)
         .post(containersUrl)
         .send({newContainer})
