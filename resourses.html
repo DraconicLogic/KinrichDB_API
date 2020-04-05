@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NTL-API: Resources</title>
-  </head>
 
-  <body>
-    <h1>NTL-API: Resources</h1>
-    <h2>Stacks</h2>
-    <p>
-      Stack Objects represent 3 or more bales that are straped up and ready to
-      load.
-    </p>
-    <p>New stacks are created in the Loading Assistant app.</p>
-    <h3>Endpoints</h3>
-    <ul>
-      <li>
-        GET - Returns an object with the array of stack objects as the only
-        value.
-        <pre>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NTL-API: Resources</title>
+</head>
+
+<body>
+  <h1>NTL-API: Resources</h1>
+
+  All of the resources listed here are JSON content
+
+  <div>
+    <h4>Endpoints</h4>
+    Stacks
+    <ol>
+      <li><a href="#get-stacks">GET - /api/stacks</a></li>
+      <li><a href="#post-stack">POST - /api/stacks</a></li>
+      <li><a href="#delete-stacks">DELETE - /api/stack</a></li>
+    </ol><br>
+    Containers
+    <ol>
+      <li><a href="#get-containers"></a>GET - /api/container</li>
+      <li><a href="#post-container"></a>POST - /api/containers</li>
+      <li><a href="#get-by-seal">GET - /api/containers/:sealNumber</a></li>
+    </ol>
+  </div>
+  <h2>Stacks</h2>
+  <p>
+    Stack Objects represent 3 or more bales that are straped up and ready to
+    load.
+  </p>
+  <p>New stacks are created in the Loading Assistant app.</p>
+
+  <ul>
+    <li id='get-stacks'>
+      <h3>GET - /api/stacks</h3> <br>
+      Returns an object with the array of stack objects as
+      the only value.
+      <pre>
           <code>
           {
             "stacks": [
@@ -37,16 +57,17 @@
           }
           </code>
         </pre>
-      </li>
-      <li>
-        POST - Creates new stack object based on newStack object recieved and
-        returns it to client
+    </li>
+    <li id='post-stack'>
+      <h3>POST - /api/stacks</h3> <br>
+      Creates new stack object based on newStack object recieved and
+      returns it to client
 
-        <h4>Sending Request</h4>
-        When sending a request to this endpoint your object should have one
-        entry with the key: "newStack". The value should be and object with the
-        following values: stackId: string content: array of strings date: string
-        <pre>
+      <h4>Sending Request</h4>
+      When sending a request to this endpoint your object should have one
+      entry with the key: "newStack". The value should be and object with the
+      following values: stackId: string content: array of strings date: string
+      <pre>
           <code>
           {
             newStack: {
@@ -57,10 +78,10 @@
           }
           </code>
         </pre>
-        <h4>Response from server</h4>
-        The object sent back from the server will have a single value a
-        'createdStack' object.
-        <pre>
+      <h4>Response from server</h4>
+      The object sent back from the server will have a single value a
+      'createdStack' object.
+      <pre>
           <code>
           {
             "createdStack": {
@@ -77,25 +98,25 @@
         }
           </code>
         </pre>
-      </li>
-      <li>
-        DELETE - Returns Report object detailing the number of entries deleted
+    </li>
+    <li id="delete-stacks">
+      DELETE - Returns Report object detailing the number of entries deleted
 
-        <h4>Sending Request</h4>
-        When sending a request to this endpoint your object should have one
-        entry with the key usedCodes. The value should be an array of stackIDs
-        <pre>
+      <h4>Sending Request</h4>
+      When sending a request to this endpoint your object should have one
+      entry with the key usedCodes. The value should be an array of stackIDs
+      <pre>
           <code>
             {
               usedCodes: ['123']
             }
           </code>
         </pre>
-        <h4>Response from server</h4>
-        The object sent back should have a report of the number of items deleted
-        keyed with "deleteReport" and a list of stackIds that were deleted keyed
-        with "deletedIds"
-        <pre>
+      <h4>Response from server</h4>
+      The object sent back should have a report of the number of items deleted
+      keyed with "deleteReport" and a list of stackIds that were deleted keyed
+      with "deletedIds"
+      <pre>
           <code>
             {
               "deleteReport": {
@@ -109,20 +130,193 @@
           }
           </code>
         </pre>
-      </li>
-    </ul>
+    </li>
+  </ul>
 
-    <h2>Containers</h2>
-    <p>
-      Container Object represent a container thats being successfully loaded and
-      sealed
-    </p>
-    <p>New Containers are created in the Loading Assistant app</p>
-    <h3>Endpoints</h3>
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-  </body>
+  <h2>Containers</h2>
+  <p>
+    Container Object represent a container thats being successfully loaded and
+    sealed
+  </p>
+  <p>New Containers are created in the Loading Assistant app</p>
+  <ul>
+    <li id="get-containers">
+      GET - /api/container Returns an object with an array of container
+      objects as the only value.
+
+      <h4>Response from server</h4>
+      <pre>
+          <code>
+            {
+              "containers": [
+                  {
+                      "_id": "5e878141e7475608127035a8",
+                      "containerNumber": "TGHU 4722375",
+                      "sealNumber": "EU18786766",
+                      "date": "18-2-2020",
+                      "__v": 0,
+                      "containerContent": [
+                          {
+                              "stackContent": [
+                                  "CSHO",
+                                  "LND",
+                                  "SOX",
+                                  "AC",
+                                  "ATS",
+                                  "AC",
+                                  "CHHR",
+                                  "CHHR",
+                                  "AC",
+                                  "AC",
+                                  "CHHR",
+                                  "AC"
+                              ],
+                              "_id": "5e878141e7475608127035a9"
+                          }
+                      ]
+                  }   
+              ]
+            }
+          </code>
+        </pre>
+      Note: in production data there will be a lot more containerContent
+      entries than in the example above.
+    </li>
+    <li id="post-container">
+      <h3>POST - /api/containers</h3> <br>
+      Creates new container object based on newContainer object recieved and returns it to the client
+
+      <h4>Sending Request</h4>
+      When sending a post reqest to this endpoint your object should have one entry with the key: "newContainer". The
+      value should be an object with the following values:
+      containerNumber, sealNumber, date, containerContent.
+      <pre>
+        <code>
+          {
+            newContainer: {
+              containerNumber: *********************
+              sealNumber: *********************
+              date: *********************
+              containerContent: [
+                {stackId: '123', stackContent: [..]},
+                {...},{...} etc
+              ]
+            }
+          }
+        </code>
+      </pre>
+      <h4>Response from server</h4>
+      The object sent back from the server will have a single object value with the key: createdContainer
+      <pre>
+        <code>
+          {
+            "createdContainer": {
+                "_id": "5e87c40c76f6f8098821e058",
+                "containerNumber": "MSKU 123456789",
+                "sealNumber": "98765443331",
+                "containerContent": [
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e059",
+                        "stackId": "123"
+                    },
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e05a",
+                        "stackId": "321"
+                    },
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e05b",
+                        "stackId": "456"
+                    },
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e05c",
+                        "stackId": "789"
+                    }
+                ],
+                "date": "10-10-19",
+                "__v": 0
+            }
+        }
+        </code>
+      </pre>
+    </li>
+    <li id="get-by-seal">
+      <h3>GET - /api/containers/:sealNumber</h3>
+      Returns object with single container object value keyed with the seal number
+      <h4>Response from server </h4>
+
+      <pre>
+        <code>
+          {
+            "98765443331": {
+                "_id": "5e87c40c76f6f8098821e058",
+                "containerNumber": "MSKU 123456789",
+                "sealNumber": "98765443331",
+                "containerContent": [
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e059",
+                        "stackId": "123"
+                    },
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e05a",
+                        "stackId": "321"
+                    },
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e05b",
+                        "stackId": "456"
+                    },
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e05c",
+                        "stackId": "789"
+                    }
+                ],
+                "date": "10-10-19",
+                "__v": 0
+            }
+        }
+        </code>
+      </pre>
+    </li>
+  </ul>
+</body>
+
 </html>
