@@ -1,8 +1,8 @@
 const ContainerModel = require('../models/containerModels')
 
-async function addContainer(req, res, next){  
-  const addedContainer = await ContainerModel.create(req.body.newContainer)
-  res.status(201).send({addedContainer})
+async function createContainer(req, res, next){  
+  const createdContainer = await ContainerModel.create(req.body.newContainer)
+  res.status(201).send({createdContainer})
 }
 
 async function getContainers(req, res, next){
@@ -13,7 +13,7 @@ async function getContainers(req, res, next){
 async function getContainerBySeal(req,res, next){
   const {sealNumber} = req.params
   const [container] = await ContainerModel.find({sealNumber})
-  res.status(200).send({container})
+  res.status(200).send({[sealNumber]: container})
 }
 
-module.exports = { addContainer, getContainers, getContainerBySeal }
+module.exports = { createContainer, getContainers, getContainerBySeal }
