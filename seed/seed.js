@@ -7,16 +7,16 @@ const seedDB = async ({stackData,  containerData}) => {
   await mongoose.connection.dropDatabase()
 
   let createdStacks;
-  let addedContainers;
+  let createdContainers;
 
   if (dbDropped) {
     createdStacks = 
     await StackModel.insertMany(stackData)
-    addedContainers =
+    createdContainers =
     await ContainerModel.insertMany(containerData)
   }
 
-  return {createdStacks, addedContainers}
+  return {createdStacks, createdContainers}
 }
 
 module.exports = { seedDB }
