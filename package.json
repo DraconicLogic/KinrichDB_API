@@ -29,7 +29,10 @@
     "cors": "^2.8.5",
     "custom-env": "^1.0.2",
     "express": "^4.17.1",
-    "mongoose": "^5.9.4"
+    "handlebars": "^4.7.6",
+    "mongoose": "^5.9.4",
+    "nodemailer": "^6.4.6",
+    "nodemailer-express-handlebars": "^4.0.0"
   },
   "devDependencies": {
     "jest": "^24.9.0",
