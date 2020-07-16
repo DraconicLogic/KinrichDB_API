@@ -1,5 +1,5 @@
 node_modules
-scrap.js
+scrap
 .env
 .env.testing
 *container.txt
