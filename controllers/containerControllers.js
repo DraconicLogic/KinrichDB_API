@@ -1,14 +1,7 @@
 const ContainerModel = require('../models/containerModels')
-const {createFile, email} = require('../email')
 
 async function createContainer(req, res, next){ 
-  const {newContainer} = req.body 
   const createdContainer = await ContainerModel.create(req.body.newContainer)
-
-  if (process.env.NODE_ENV !== 'test') {
-    email(createFile(newContainer), newContainer)
-  }
-
   res.status(201).send({createdContainer})
 }
 
