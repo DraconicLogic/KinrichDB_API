@@ -1,53 +1,61 @@
-const {EMAIL_USERNAME, EMAIL_PASSWORD} = process.env
-const fs = require('fs')
 const nodemailer = require("nodemailer")
-// const hbs = require('nodemailer-express-handlebars')
+const { google } = require('googleapis')
+const OAuth2 = google.auth.OAuth2
+const {
+  EMAIL_USERNAME,
+  NODE_ENV,
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REFRESH_TOKEN,
+  REDIRECT_URL
+} = process.env
 
-function createFile({containerContent, date}) {
-  console.log('CREATING FILE')
-  console.log(containerContent)
-  const contentObj = containerContent.reduce((obj, stack) => {
-    stack.stackContent.forEach((bale) => {
-      if (!obj[bale]) obj[bale] = 1
-      else obj[bale] += 1
-    })
-    return obj
-  }, {})
-  const fileName = `${date}_container.txt`
 
-  fs.writeFileSync(fileName, JSON.stringify(contentObj,null,2))
-  return fileName
-}
 
-async function email(fileName,{ containerNumber, sealNumber}) {
-  console.log('SENDING EMAIL')
+async function sendEmail(req, res, next) {
+  
+  const { fileName, containerNumber, sealNumber } = req.body.newContainer
+  
+  const oauth2Client = new OAuth2(
+    CLIENT_ID, 
+    CLIENT_SECRET,
+    REDIRECT_URL
+)
 
-  const transporter = await nodemailer.createTransport({
+  oauth2Client.setCredentials({
+    refresh_token: REFRESH_TOKEN
+  });
+
+  const accessToken = oauth2Client.getAccessToken()
+
+  const transporter = nodemailer.createTransport({
     service: 'gmail',
-    auth: {
-      user: EMAIL_USERNAME,
-      pass: EMAIL_PASSWORD
-    },
     port: 465,
     host: "smtp.gmail.com",
     secure: true,
     tls:{
       secure: true,
 
+    },
+    auth: {
+      type: 'OAuth2',
+      user: EMAIL_USERNAME,
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      refreshToken: REFRESH_TOKEN,
+      accessToken
     }
   })
 
-  // transporter.use('compile',hbs({
-  //   viewEngine: 'express-handlebars',
-  //   viewPath: './email/email.handlebars',
-  //   extName: '.handlebars'
-    
-  // }))
+  const testIndicator = NODE_ENV === "dev" ||' test' ? "(Test)" : ''
 
   const mailOptions = {
     from: EMAIL_USERNAME,
-    to: 'onyensoh1987@hotmail.com',
-    subject: 'Container Loaded',
+    to: [
+      'onyensoh1987@hotmail.com', 
+      // 'eze.onyensoh@yahoo.co.uk'
+    ],
+    subject: `Container Loaded ${testIndicator}`,
     attachments: [
       {path: `./${fileName}` }
     ],
@@ -65,10 +73,6 @@ async function email(fileName,{ containerNumber, sealNumber}) {
   })
   .catch(console.error)
     
-  //   (error, info) => {
-  //   if (error) console.error('Email Error: ',  error)
-  //   else console.log(`Email sent: ${info.response}`)
-  // }
-
+  next()
 }
-module.exports = { createFile, email }
+module.exports = { sendEmail }
