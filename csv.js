@@ -6,7 +6,6 @@ async function createCSV(req, res, next) {
   if (newContainer) {
     
     const contentObject = createContentObject(newContainer.containerContent)
-    console.log('contentObject: ',contentObject)
     const orderedContainer = putInOrder(contentObject)
     const formattedRecords = formatContainer(orderedContainer)
     const fileName = `${newContainer.date}_container.csv`
@@ -29,7 +28,6 @@ async function createCSV(req, res, next) {
 
   
   } else {
-    console.log("NO NEW CONTAINER")
     next()
   }
 }
