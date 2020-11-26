@@ -1,5 +1,5 @@
 require('custom-env').env()
-const { DB_HOST, DB_NAME } = process.env
+const { DB_URI, DB_NAME } = process.env
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
@@ -9,9 +9,8 @@ const cors = require('cors')
 const path = require('path')
 const { createCSV } = require('./csv')
 const { sendEmail } = require('./email/index.js')
-
-
-mongoose.connect(`${DB_HOST}${DB_NAME}`, {useNewUrlParser: true, useUnifiedTopology: true})
+  
+mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
   console.log(`Successfully connected to ${DB_NAME}`)
 }) 
