@@ -23,7 +23,7 @@ async function sendEmail(req, res, next) {
       CLIENT_ID, 
       CLIENT_SECRET,
       REDIRECT_URL
-  )
+    )
   
     oauth2Client.setCredentials({
       refresh_token: REFRESH_TOKEN
