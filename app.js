@@ -9,6 +9,7 @@ const cors = require('cors')
 const path = require('path')
 const { createCSV } = require('./csv')
 const { sendEmail } = require('./email/index.js')
+const { corsOptions } = require('./utils/corsConfig.js')
   
 mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
@@ -16,7 +17,7 @@ mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 }) 
 .catch(console.error)
 
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(createCSV)
 app.use(sendEmail)
