@@ -58,21 +58,29 @@ describe('Nnenna Textiles API',() => {
           })
       })
     })
-    describe("POST /stacks", () => {
+    describe.only("POST /stacks", () => {
       
       const newStack = {
         stackId: '496',
         content: ['ATS', 'ATS', 'ATS', 'LTS', 'LTS', 'LTS', 'LTSH', 'LTSH', 'LTSH', 'AC', 'AC', 'AC'],
-        date: '25-2-20'
+        date: new Date()
       }
 
-      it("Retrieves newly added stack", async (done) => {
+      it.only("Retrieves newly added stack", async (done) => {
+        console.log('dateObject ->, ',newStack.date)
         return request(app)
           .post(stacksUrl)
           .send({newStack})
           .then((res) => {
+            const { createdStack } = res.body
+            console.log('response -> ', createdStack)
             expect(res.status).toEqual(201)
-            expect(res.body.createdStack.stackId).toEqual(newStack.stackId)
+            expect(createdStack).toHaveProperty('stackId')
+            expect(createdStack).toHaveProperty('content')
+            expect(createdStack).toHaveProperty('date')
+            expect(createdStack.stackId).toEqual(newStack.stackId)
+            expect(createdStack.content).toEqual(expect.arrayContaining(newStack.content))
+            
             done()
           })
       })

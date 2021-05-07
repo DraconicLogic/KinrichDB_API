@@ -3,4 +3,4 @@ scrap
 .env
 .env.testing
 *container.txt
-
+.vscode

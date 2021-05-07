@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const stackSchema = new Schema({
   stackId: 'string',
   content: ['string'],
-  date: 'string'
+  date: {type: Date, default: Date.now}
 })
 
 module.exports = StackModel = mongoose.model('Stack', stackSchema)
