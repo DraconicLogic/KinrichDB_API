@@ -1,0 +1,571 @@
+{
+  "ATS": {
+    "code": "ATS",
+    "item": "Adult/Men Tshirt",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LMP": {
+    "code": "LMP",
+    "item": "Ladies Mixed Pants",
+    "baleSize": "big",
+    "price": 70,
+    "units": "PCS",
+    "size": 98
+  },
+  "CR": {
+    "code": "CR",
+    "item": "Children Rumage",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "BRA": {
+    "code": "BRA",
+    "item": "Brassier",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55,
+    "limit": 2
+  },
+  "LCD": {
+    "code": "LCD",
+    "item": "Ladies Cotton Dress",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LCB": {
+    "code": "LCB",
+    "item": "Ladies Cotton Blouse",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LCS": {
+    "code": "LCS",
+    "item": "Ladies Cotton Skirt",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LPD": {
+    "code": "LPD",
+    "item": "Ladies Poly Dress",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LPB": {
+    "code": "LPB",
+    "item": "Ladies Poly Blouse",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LPS": {
+    "code": "LPS",
+    "item": "Ladies Poly Skirt",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LND": {
+    "code": "LND",
+    "item": "Ladies Night Dress",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "NYCL": {
+    "code": "NYCL",
+    "item": "Ladies Nylon Clothing",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "MTP": {
+    "code": "MTP",
+    "item": "Men Tergal Pants",
+    "baleSize": "big",
+    "price": 70,
+    "units": "PCS",
+    "size": 88
+  },
+  "MCP": {
+    "code": "MCP",
+    "item": "Men Cotton Pants",
+    "baleSize": "big",
+    "price": 70,
+    "units": "PCS",
+    "size": 135
+  },
+  "LSW": {
+    "code": "LSW",
+    "item": "Ladies Swim Wear",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "CORD": {
+    "code": "CORD",
+    "item": "Corduroy Pant",
+    "baleSize": "small",
+    "price": 70,
+    "units": "PCS",
+    "size": 55
+  },
+  "MSH": {
+    "code": "MSH",
+    "item": "Men Shirts",
+    "baleSize": "big",
+    "price": 70,
+    "units": "PCS",
+    "size": 96
+  },
+  "HSH": {
+    "code": "HSH",
+    "item": "Heavy Shirts",
+    "baleSize": "big",
+    "price": 70,
+    "units": "PCS",
+    "size": 71
+  },
+  "AC": {
+    "code": "AC",
+    "item": "Asian Clothing",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "CPT": {
+    "code": "CPT",
+    "item": "Children Pant",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LEATHER": {
+    "code": "LEATHER",
+    "item": "Leather",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "LDD": {
+    "code": "LDD",
+    "item": "Ladies Denim Dress",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "LDS": {
+    "code": "LDS",
+    "item": "Ladies Denim Skirt",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "TOY": {
+    "code": "TOY",
+    "item": "Toys",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 300
+  },
+  "OSH": {
+    "code": "OSH",
+    "item": "Original Shorts",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LTSH": {
+    "code": "LTSH",
+    "item": "Ladies Tshirt",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "CJS": {
+    "code": "CJS",
+    "item": "Children Jogging Suit",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "CANO": {
+    "code": "CANO",
+    "item": "Children Anoraks",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "CHKNW": {
+    "code": "CHKNW",
+    "item": "Children Knit Wear",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "SOX": {
+    "code": "SOX",
+    "item": "Paired Socks",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "PYJ": {
+    "code": "PYJ",
+    "item": "Pyjamas",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "MIX TRA": {
+    "code": "MIXTRA",
+    "item": "Mix Training",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "BELT": {
+    "code": "BELT",
+    "item": "Belts",
+    "baleSize": "small",
+    "price": 29.7,
+    "units": "KG",
+    "size": 594
+  },
+  "ZIP": {
+    "code": "ZIP",
+    "item": "Mix Zipper Jackets",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 80
+  },
+  "NYHHR": {
+    "code": "NYHHR",
+    "item": "Ladies Denim Skirt",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "HHR": {
+    "code": "HHR",
+    "item": "Household Rummage",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "JUMP": {
+    "code": "JUMP",
+    "item": "Jumper",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 60
+  },
+  "LEG": {
+    "code": "LEG",
+    "item": "Leggings",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "WSH": {
+    "code": "WSH",
+    "item": "White Shirt",
+    "baleSize": "big",
+    "price": 70,
+    "units": "PCS",
+    "size": 86
+  },
+  "LSHO": {
+    "code": "LSHO",
+    "item": "Adult Long Short",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "BPT": {
+    "code": "BPT",
+    "item": "Boys Pants",
+    "baleSize": "big",
+    "price": 70,
+    "units": "KG",
+    "size": 102
+  },
+  "MSUIT": {
+    "code": "MSUIT",
+    "item": "Men Suits",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 45
+  },
+  "WHAT": {
+    "code": "WHAT",
+    "item": "Hats",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LTS": {
+    "code": "LTS",
+    "item": "Ladies Tergal Skirt",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LSUIT": {
+    "code": "LSUIT",
+    "item": "Ladies Suit",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "SCHUNI": {
+    "code": "SCHUNI",
+    "item": "School Uniform",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "CSHO": {
+    "code": "CSHO",
+    "item": "Cut Short",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "SLIP": {
+    "code": "SLIP",
+    "item": "Slips",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "CTS": {
+    "code": "CTS",
+    "item": "Children Tshirt",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "NET": {
+    "code": "NET",
+    "item": "Net Curtains",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "UW": {
+    "code": "UW",
+    "item": "Underwear",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "LWCB": {
+    "code": "LWCB",
+    "item": "Ladies White Cotton Blouse",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "PINUP": {
+    "code": "PINUP",
+    "item": "Pin Ups",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "MBS": {
+    "code": "MBS",
+    "item": "Men/Boys Swim Wear",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "CHHR": {
+    "code": "CHHR",
+    "item": "Cotton Household Rummage",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "FCAP": {
+    "code": "FCAP",
+    "item": "Face Caps",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "MJK": {
+    "code": "MJK",
+    "item": "Mens Jacket",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "GRD": {
+    "code": "GRD",
+    "item": "Girdles",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "SS": {
+    "code": "SS",
+    "item": "Silk Scarves",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "SC": {
+    "code": "SC",
+    "item": "Suitcases",
+    "baleSize": "small",
+    "price": 3,
+    "units": "KG",
+    "size": 55
+  },
+  "PARTYDRESS": {
+    "code": "PARTYDRESS",
+    "item": "Party Dress",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "L POLO D": {
+    "code": "L POLO D",
+    "item": "Ladies Polo Dress",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "L POLO S": {
+    "code": "L POLO S",
+    "item": "Ladies Polo Skirt",
+    "baleSize": "small",
+    "price": 70,
+    "units": "KG",
+    "size": 55
+  },
+  "FLEECE": {
+    "code": "FLEECE",
+    "item": "Fleeces",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "BLANKET": {
+    "code": "BLANKET",
+    "item": "Blankets",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "SSH": {
+    "code": "SSH",
+    "item": "Sweatshirts",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 60
+  },
+  "POLO LS": {
+    "code": "POLO LS",
+    "item": "Polo Long Sleeve",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "FT MAT": {
+    "code": "FT MAT",
+    "item": "Foot Mat",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "LJK": {
+    "code": "LJK",
+    "item": "Ladies Light Jacket",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  },
+  "LHB": {
+    "code": "LHB",
+    "item": "Ladies Handbags",
+    "baleSize": "small",
+    "price": 20.8,
+    "units": "KG",
+    "size": 330
+  },
+  "SPORT": {
+    "code": "SPORT",
+    "item": "Sports and Gym Wear",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
+  }
+}
