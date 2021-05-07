@@ -29,8 +29,7 @@
     "baleSize": "small",
     "price": 70,
     "units": "KG",
-    "size": 55,
-    "limit": 2
+    "size": 55
   },
   "LCD": {
     "code": "LCD",
