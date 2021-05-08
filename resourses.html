@@ -260,8 +260,65 @@
       </pre>
     </li>
     <li id="get-by-seal">
-      <h3>GET - /api/containers/:sealNumber</h3>
+      <h3>GET - /api/containers/seal-num/:sealNumber</h3>
       Returns object with single container object value keyed with the seal number
+      <h4>Response from server </h4>
+
+      <pre>
+        <code>
+          {
+            "98765443331": {
+                "_id": "5e87c40c76f6f8098821e058",
+                "containerNumber": "MSKU 123456789",
+                "sealNumber": "98765443331",
+                "containerContent": [
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e059",
+                        "stackId": "123"
+                    },
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e05a",
+                        "stackId": "321"
+                    },
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e05b",
+                        "stackId": "456"
+                    },
+                    {
+                        "stackContent": [
+                            "MCP",
+                            "MCP",
+                            "MCP"
+                        ],
+                        "_id": "5e87c40c76f6f8098821e05c",
+                        "stackId": "789"
+                    }
+                ],
+                "date": "10-10-19",
+                "__v": 0
+            }
+        }
+        </code>
+      </pre>
+    </li>
+    <li id="get-by-boxnum">
+      <h3>GET - /api/containers/box-num/:containerNumber</h3>
+      Returns object with single container object value keyed with the Contanier number
       <h4>Response from server </h4>
 
       <pre>

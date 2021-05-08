@@ -16,4 +16,11 @@ async function getContainerBySeal(req,res, next){
   res.status(200).send({[sealNumber]: container})
 }
 
-module.exports = { createContainer, getContainers, getContainerBySeal }
+async function getContainerByContainerNumber(req, res, next){
+  const {containerNumber} = req.params
+  const [container] = await ContainerModel.find(
+  {containerNumber})
+  res.status(200).send({[containerNumber]: container})
+}
+
+module.exports = { createContainer, getContainers, getContainerBySeal, getContainerByContainerNumber }

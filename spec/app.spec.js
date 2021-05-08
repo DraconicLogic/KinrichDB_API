@@ -158,7 +158,7 @@ describe('Nnenna Textiles API',() => {
       it('Returns container by their seal number ', async(done) => {
         const urlSuffix = 'EU18786766'
         return request(app)
-        .get(`${containersUrl}${urlSuffix}`)
+        .get(`${containersUrl}seal-num/${urlSuffix}`)
         .then((response) => {
           expect(response.status).toEqual(200)
           expect(response.body[urlSuffix].sealNumber).toEqual(urlSuffix)
@@ -169,7 +169,7 @@ describe('Nnenna Textiles API',() => {
       it('Returns container by their container number', async(done) => {
         const urlSuffix = "MSCU 5681388"
         return request(app)
-        .get(`${containersUrl}${urlSuffix}`)
+        .get(`${containersUrl}box-num/${urlSuffix}`)
         .then((response) => {
           expect(response.status).toEqual(200)
           expect(response.body[urlSuffix].containerNumber).toEqual(urlSuffix)
