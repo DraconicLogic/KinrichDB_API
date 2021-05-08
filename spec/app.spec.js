@@ -58,7 +58,7 @@ describe('Nnenna Textiles API',() => {
           })
       })
     })
-    describe.only("POST /stacks", () => {
+    describe("POST /stacks", () => {
       
       const newStack = {
         stackId: '496',
@@ -66,7 +66,7 @@ describe('Nnenna Textiles API',() => {
         date: new Date()
       }
 
-      it.only("Retrieves newly added stack", async (done) => {
+      it("Retrieves newly added stack", async (done) => {
         console.log('dateObject ->, ',newStack.date)
         return request(app)
           .post(stacksUrl)
@@ -144,7 +144,7 @@ describe('Nnenna Textiles API',() => {
   })
   describe("/containers endpoints", () => {
     const containersUrl = '/api/containers/'
-    describe('GET /containers', () => {
+    describe.only('GET /containers', () => {
       it('Return same number of entries seeded', async(done) => {
         const seededContainers = seedResults.createdContainers
         return request(app)
@@ -155,7 +155,7 @@ describe('Nnenna Textiles API',() => {
           done()
         })
       })
-      it('Returns the one container that the seal matches ', async(done) => {
+      it('Returns container by their seal number ', async(done) => {
         const urlSuffix = 'EU18786766'
         return request(app)
         .get(`${containersUrl}${urlSuffix}`)
@@ -165,6 +165,16 @@ describe('Nnenna Textiles API',() => {
           done()
         })
 
+      })
+      it('Returns container by their container number', async(done) => {
+        const urlSuffix = "MSCU 5681388"
+        return request(app)
+        .get(`${containersUrl}${urlSuffix}`)
+        .then((response) => {
+          expect(response.status).toEqual(200)
+          expect(response.body[urlSuffix].containerNumber).toEqual(urlSuffix)
+          done()
+        })
       })
     })
     describe('POST /containers',() => {
