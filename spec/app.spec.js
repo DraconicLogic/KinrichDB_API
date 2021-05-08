@@ -144,7 +144,7 @@ describe('Nnenna Textiles API',() => {
   })
   describe("/containers endpoints", () => {
     const containersUrl = '/api/containers/'
-    describe.only('GET /containers', () => {
+    describe('GET /containers', () => {
       it('Return same number of entries seeded', async(done) => {
         const seededContainers = seedResults.createdContainers
         return request(app)
