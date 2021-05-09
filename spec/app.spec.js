@@ -8,6 +8,7 @@ const  request  = require('supertest')
 const { seedDB } = require('../seed/seed.js')
 const stackData = require('../seed/testData/stacks.json')
 const containerData = require('../seed/testData/containers.json')
+const products = require('../products.json')
 
 
 
@@ -192,6 +193,20 @@ describe('Nnenna Textiles API',() => {
             expect(secondResponse.body.containers).toHaveLength(seededContainers.length + 1)
             done()
           })
+        })
+      })
+    })
+  })
+  describe("/products endpoints", () => {
+    const productsUrl = '/api/products'
+    describe('GET /products', () => {
+      it("Returns Object with all of the products", async (done) => {
+        return request(app)
+        .get(productsUrl)
+        .then((response) => {
+          expect(response.status).toEqual(200)
+          expect(response.body.products).toStrictEqual(products)
+          done()
         })
       })
     })

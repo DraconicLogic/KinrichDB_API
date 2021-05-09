@@ -5,6 +5,6 @@ const productRouter = require('./productRoutes')
 
 apiRouter.use('/stacks', stacksRouter)
 apiRouter.use('/containers', containerRouter)
-apiRouter.use('./products', productRouter)
+apiRouter.use('/products', productRouter)
 
 module.exports =  apiRouter 

@@ -6,7 +6,7 @@ async function createProduct(req, res, next) {
 }
 
 function getProducts(req, res, next){
-  res.status(200).send(products)
+  res.status(200).send({products})
 } 
 
 module.exports = {getProducts}
