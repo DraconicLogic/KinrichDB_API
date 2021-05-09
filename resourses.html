@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTL-API: Resources</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NTL-API: Resources</title>
-</head>
+  <body>
+    <h1>NTL-API: Resources</h1>
 
-<body>
-  <h1>NTL-API: Resources</h1>
+    All of the resources listed here are JSON content
 
-  All of the resources listed here are JSON content
+    <div>
+      <h4>Endpoints</h4>
+      Stacks
+      <ol>
+        <li><a href="#get-stacks">GET - /api/stacks</a></li>
+        <li><a href="#post-stack">POST - /api/stacks</a></li>
+        <li><a href="#delete-stacks">DELETE - /api/stack</a></li>
+      </ol>
+      <br />
+      Containers
+      <ol>
+        <li><a href="#get-containers">GET - /api/container</a></li>
+        <li><a href="#post-container">POST - /api/containers</a></li>
+        <li>
+          <a href="#get-by-seal">GET - /api/containers/seal-num/:sealNumber</a>
+        </li>
+        <li>
+          <a href="#get-by-boxnum"
+            >GET - /api/containers/box-num/:containerNumber</a
+          >
+        </li>
+      </ol>
+      <br />
+      Products
+      <ol>
+        <li><a href="#get-products">GET - /api/products</a></li>
+      </ol>
+    </div>
+    <h2>Stacks</h2>
+    <p>
+      Stack Objects represent 3 or more bales that are straped up and ready to
+      load.
+    </p>
+    <p>New stacks are created in the Loading Assistant app.</p>
 
-  <div>
-    <h4>Endpoints</h4>
-    Stacks
-    <ol>
-      <li><a href="#get-stacks">GET - /api/stacks</a></li>
-      <li><a href="#post-stack">POST - /api/stacks</a></li>
-      <li><a href="#delete-stacks">DELETE - /api/stack</a></li>
-    </ol><br>
-    Containers
-    <ol>
-      <li><a href="#get-containers">GET - /api/container</a></li>
-      <li><a href="#post-container">POST - /api/containers</a></li>
-      <li><a href="#get-by-seal">GET - /api/containers/:sealNumber</a></li>
-    </ol>
-  </div>
-  <h2>Stacks</h2>
-  <p>
-    Stack Objects represent 3 or more bales that are straped up and ready to
-    load.
-  </p>
-  <p>New stacks are created in the Loading Assistant app.</p>
-
-  <ul>
-    <li id='get-stacks'>
-      <h3>GET - /api/stacks</h3> <br>
-      Returns an object with the array of stack objects as
-      the only value.
-      <pre>
+    <ul>
+      <li id="get-stacks">
+        <h3>GET - /api/stacks</h3>
+        <br />
+        Returns an object with the array of stack objects as the only value.
+        <pre>
           <code>
           {
             "stacks": [
@@ -57,17 +69,18 @@
           }
           </code>
         </pre>
-    </li>
-    <li id='post-stack'>
-      <h3>POST - /api/stacks</h3> <br>
-      Creates new stack object based on newStack object recieved and
-      returns it to client
+      </li>
+      <li id="post-stack">
+        <h3>POST - /api/stacks</h3>
+        <br />
+        Creates new stack object based on newStack object recieved and returns
+        it to client
 
-      <h4>Sending Request</h4>
-      When sending a request to this endpoint your object should have one
-      entry with the key: "newStack". The value should be and object with the
-      following values: stackId: string content: array of strings date: string
-      <pre>
+        <h4>Sending Request</h4>
+        When sending a request to this endpoint your object should have one
+        entry with the key: "newStack". The value should be and object with the
+        following values: stackId: string content: array of strings date: string
+        <pre>
           <code>
           {
             newStack: {
@@ -78,10 +91,10 @@
           }
           </code>
         </pre>
-      <h4>Response from server</h4>
-      The object sent back from the server will have a single value a
-      'createdStack' object.
-      <pre>
+        <h4>Response from server</h4>
+        The object sent back from the server will have a single value a
+        'createdStack' object.
+        <pre>
           <code>
           {
             "createdStack": {
@@ -98,25 +111,25 @@
         }
           </code>
         </pre>
-    </li>
-    <li id="delete-stacks">
-      DELETE - Returns Report object detailing the number of entries deleted
+      </li>
+      <li id="delete-stacks">
+        DELETE - Returns Report object detailing the number of entries deleted
 
-      <h4>Sending Request</h4>
-      When sending a request to this endpoint your object should have one
-      entry with the key usedCodes. The value should be an array of stackIDs
-      <pre>
+        <h4>Sending Request</h4>
+        When sending a request to this endpoint your object should have one
+        entry with the key usedCodes. The value should be an array of stackIDs
+        <pre>
           <code>
             {
               usedCodes: ['123']
             }
           </code>
         </pre>
-      <h4>Response from server</h4>
-      The object sent back should have a report of the number of items deleted
-      keyed with "deleteReport" and a list of stackIds that were deleted keyed
-      with "deletedIds"
-      <pre>
+        <h4>Response from server</h4>
+        The object sent back should have a report of the number of items deleted
+        keyed with "deleteReport" and a list of stackIds that were deleted keyed
+        with "deletedIds"
+        <pre>
           <code>
             {
               "deleteReport": {
@@ -130,22 +143,22 @@
           }
           </code>
         </pre>
-    </li>
-  </ul>
+      </li>
+    </ul>
 
-  <h2>Containers</h2>
-  <p>
-    Container Object represent a container thats being successfully loaded and
-    sealed
-  </p>
-  <p>New Containers are created in the Loading Assistant app</p>
-  <ul>
-    <li id="get-containers">
-      GET - /api/container Returns an object with an array of container
-      objects as the only value.
+    <h2>Containers</h2>
+    <p>
+      Container Object represent a container thats being successfully loaded and
+      sealed
+    </p>
+    <p>New Containers are created in the Loading Assistant app</p>
+    <ul>
+      <li id="get-containers">
+        GET - /api/container Returns an object with an array of container
+        objects as the only value.
 
-      <h4>Response from server</h4>
-      <pre>
+        <h4>Response from server</h4>
+        <pre>
           <code>
             {
               "containers": [
@@ -179,18 +192,21 @@
             }
           </code>
         </pre>
-      Note: in production data there will be a lot more containerContent
-      entries than in the example above.
-    </li>
-    <li id="post-container">
-      <h3>POST - /api/containers</h3> <br>
-      Creates new container object based on newContainer object recieved and returns it to the client
+        Note: in production data there will be a lot more containerContent
+        entries than in the example above.
+      </li>
+      <li id="post-container">
+        <h3>POST - /api/containers</h3>
+        <br />
+        Creates new container object based on newContainer object recieved and
+        returns it to the client
 
-      <h4>Sending Request</h4>
-      When sending a post reqest to this endpoint your object should have one entry with the key: "newContainer". The
-      value should be an object with the following values:
-      containerNumber, sealNumber, date, containerContent.
-      <pre>
+        <h4>Sending Request</h4>
+        When sending a post reqest to this endpoint your object should have one
+        entry with the key: "newContainer". The value should be an object with
+        the following values: containerNumber, sealNumber, date,
+        containerContent.
+        <pre>
         <code>
           {
             newContainer: {
@@ -205,9 +221,10 @@
           }
         </code>
       </pre>
-      <h4>Response from server</h4>
-      The object sent back from the server will have a single object value with the key: createdContainer
-      <pre>
+        <h4>Response from server</h4>
+        The object sent back from the server will have a single object value
+        with the key: createdContainer
+        <pre>
         <code>
           {
             "createdContainer": {
@@ -258,13 +275,14 @@
         }
         </code>
       </pre>
-    </li>
-    <li id="get-by-seal">
-      <h3>GET - /api/containers/seal-num/:sealNumber</h3>
-      Returns object with single container object value keyed with the seal number
-      <h4>Response from server </h4>
+      </li>
+      <li id="get-by-seal">
+        <h3>GET - /api/containers/seal-num/:sealNumber</h3>
+        Returns object with single container object value keyed with the seal
+        number
+        <h4>Response from server</h4>
 
-      <pre>
+        <pre>
         <code>
           {
             "98765443331": {
@@ -315,13 +333,14 @@
         }
         </code>
       </pre>
-    </li>
-    <li id="get-by-boxnum">
-      <h3>GET - /api/containers/box-num/:containerNumber</h3>
-      Returns object with single container object value keyed with the Contanier number
-      <h4>Response from server </h4>
+      </li>
+      <li id="get-by-boxnum">
+        <h3>GET - /api/containers/box-num/:containerNumber</h3>
+        Returns object with single container object value keyed with the
+        Contanier number
+        <h4>Response from server</h4>
 
-      <pre>
+        <pre>
         <code>
           {
             "98765443331": {
@@ -372,8 +391,44 @@
         }
         </code>
       </pre>
-    </li>
-  </ul>
-</body>
+      </li>
+    </ul>
+    <h2>Products</h2>
+    <p>The Products Object contains all the items that Kinrich deals with.</p>
+    <p>
+      New app Kinrich apps should pull the products object from here instead of
+      storing a json file in their root directory
+    </p>
 
+    <ul>
+      <li id="#get-products"></li>
+      <h3>GET - /api/products</h3>
+      <br />
+      Returns an object with the products object as the sole value
+
+      <pre>
+        <code>
+          {
+            "products": {
+              "ATS": {
+                "code": "ATS",
+                "item": "Adult/Men Tshirt",
+                "baleSize": "small",
+                "price": 70,
+                "units": "KG",
+                "size": 55
+              },
+              "LMP": {
+                "code": "LMP",
+                "item": "Ladies Mixed Pants",
+                "baleSize": "big",
+                "price": 70,
+                "units": "PCS",
+                "size": 98
+              }, ...
+            }
+        </code>
+      </pre>
+    </ul>
+  </body>
 </html>
