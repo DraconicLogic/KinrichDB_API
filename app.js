@@ -7,8 +7,6 @@ const apiRouter = require('./routes/api.js')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
-const { createCSV } = require('./csv')
-const { sendEmail } = require('./email/index.js')
 const { corsOptions } = require('./utils/corsConfig.js')
   
 mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -19,8 +17,7 @@ mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
-app.use(createCSV)
-app.use(sendEmail)
+
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(`${__dirname}/welcome.html`))
 })

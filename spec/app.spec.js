@@ -68,13 +68,11 @@ describe('Nnenna Textiles API',() => {
       }
 
       it("Retrieves newly added stack", async (done) => {
-        console.log('dateObject ->, ',newStack.date)
         return request(app)
           .post(stacksUrl)
           .send({newStack})
           .then((res) => {
             const { createdStack } = res.body
-            console.log('response -> ', createdStack)
             expect(res.status).toEqual(201)
             expect(createdStack).toHaveProperty('stackId')
             expect(createdStack).toHaveProperty('content')
