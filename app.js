@@ -2,7 +2,6 @@ require('custom-env').env()
 const { DB_URI, DB_NAME } = process.env
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser')
 const apiRouter = require('./routes/api.js')
 const mongoose = require('mongoose')
 const cors = require('cors')
@@ -15,7 +14,7 @@ mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .catch(console.error)
 
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(`${__dirname}/welcome.html`))
