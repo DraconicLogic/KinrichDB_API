@@ -3,7 +3,6 @@ const { DB_URI, DB_NAME } = process.env
 const express = require('express');
 const app = express();
 const apiRouter = require('./routes/api.js')
-const corsOptions = require('./utils/corsConfig.js')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
@@ -14,7 +13,7 @@ mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 }) 
 .catch(console.error)
 
-app.options('*', cors(corsOptions))
+app.options('*', cors())
 app.use(express.json())
 
 app.get('/', (req, res, next) => {
