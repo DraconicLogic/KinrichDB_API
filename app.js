@@ -13,7 +13,7 @@ mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 }) 
 .catch(console.error)
 
-app.use(cors())
+app.use(cors({origin: true}))
 app.use(express.json())
 
 app.get('/', (req, res, next) => {
