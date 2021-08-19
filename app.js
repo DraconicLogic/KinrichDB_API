@@ -6,6 +6,7 @@ const apiRouter = require('./routes/api.js')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
+const corsOptions = require('./utils/corsConfig')
   
 mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
@@ -13,7 +14,7 @@ mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 }) 
 .catch(console.error)
 
-app.options('*', cors())
+app.use(cors(corsOptions))
 app.use(express.json())
 
 app.get('/', (req, res, next) => {
