@@ -12,7 +12,7 @@ const products = require('../products.json')
 
 
 
-describe('Nnenna Textiles API',() => {
+describe('Kinrich API',() => {
   let seedResults;
 
   beforeAll(() => {
@@ -207,6 +207,23 @@ describe('Nnenna Textiles API',() => {
           done()
         })
       })
+    })
+  })
+  describe("Error Handling", () => {
+    describe("404 - Not Found", () => {
+      const invalidUrl = "/app/shoes"
+      it("Responds with 404 and 'Not Found' message", async (done) => {
+        return request(app)
+        .get(invalidUrl)
+        .then((response) => {
+          
+
+          expect(response.status).toEqual(404)
+          expect(response.notFound).toBe(true)          
+          done()
+        })
+      })
+
     })
   })
 })

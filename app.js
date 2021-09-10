@@ -6,6 +6,9 @@ const apiRouter = require('./routes/api.js')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
+const {corsOptions} = require('./utils/corsConfig')
+const {preflightHandler} = require('./utils/preflightHandler')
+const error = require("./utils/Error")
   
 mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
@@ -13,8 +16,9 @@ mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 }) 
 .catch(console.error)
 
-app.use(cors({origin: true}))
 app.use(express.json())
+app.use(cors(corsOptions))
+app.use(preflightHandler)
 
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(`${__dirname}/welcome.html`))
@@ -24,5 +28,6 @@ app.get('/api',(req, res, next) => {
   res.sendFile(path.join(`${__dirname}/resourses.html`))
 })
 app.use('/api', apiRouter)
+app.use(error.notFound)
 
 module.exports = app
