@@ -6,7 +6,6 @@ const apiRouter = require('./routes/api.js')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
-const {corsOptions} = require('./utils/corsConfig')
 const {preflightHandler} = require('./utils/preflightHandler')
 const error = require("./utils/Error")
   
@@ -17,7 +16,7 @@ mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .catch(console.error)
 
 app.use(express.json())
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(preflightHandler)
 
 app.get('/', (req, res, next) => {
