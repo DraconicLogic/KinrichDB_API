@@ -2,7 +2,9 @@ const StackModel = require('../models/stackModels')
 
 
 async function createStack(req, res, next){
+  console.log("Before DB entry: ", req.body.newStack)
   const createdStack = await StackModel.create(req.body.newStack)
+  console.log("After DB entry: ", createdStack)
   res.status(201).send({createdStack})
 }
 
