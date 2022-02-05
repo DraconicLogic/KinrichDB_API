@@ -9,6 +9,7 @@ const { seedDB } = require('../seed/seed.js')
 const stackData = require('../seed/testData/stacks.json')
 const containerData = require('../seed/testData/containers.json')
 const products = require('../products.json')
+const {checkForPlaceholder} = require('./testUtils.js')
 
 
 
@@ -58,13 +59,47 @@ describe('Kinrich API',() => {
             done()
           })
       })
+      it("Should not return the placeholder stack", async (done) => {
+        return request(app)
+        .get(stacksUrl)
+        .then((response) => {
+          const {status, body} = response
+          expect(status).toEqual(200)
+          expect(checkForPlaceholder(body.stacks)).toBe(false)
+          done()
+        })
+      })
+      it("lastEdited should match placeholder", async (done) => {
+        const latestPlaceholder = {
+          stackId: '@',
+          content: [],
+          date: '9999-12-31T00:00:00.000Z'
+        }
+        return request(app)
+        .post(stacksUrl)
+        .send({newStack: latestPlaceholder})
+        .then((firstResponse) => {
+          expect(firstResponse.status).toEqual(201)
+          return request(app)
+          .get(stacksUrl)
+          .then((secondResponse) => {
+            const {status, body} = secondResponse        
+            expect(status).toEqual(200)
+            expect(body).toHaveProperty("lastEdited")
+            expect(body.lastEdited).toBe(latestPlaceholder.date)
+            expect(checkForPlaceholder(body.stacks)).toBe(false)
+            done()
+          })
+        })
+
+      })
     })
     describe("POST /stacks", () => {
       
       const newStack = {
         stackId: '496',
         content: ['ATS', 'ATS', 'ATS', 'LTS', 'LTS', 'LTS', 'LTSH', 'LTSH', 'LTSH', 'AC', 'AC', 'AC'],
-        date: new Date()
+        date: new Date().toISOString()
       }
 
       it("Retrieves newly added stack", async (done) => {
