@@ -10,6 +10,7 @@ const stackData = require('../seed/testData/stacks.json')
 const containerData = require('../seed/testData/containers.json')
 const products = require('../products.json')
 const {checkForPlaceholder} = require('./testUtils.js')
+const altStacks = require("../seed/testData/altStacks.json")
 
 
 
@@ -163,6 +164,19 @@ describe('Kinrich API',() => {
           })
         })
       })
+    })
+    describe.only("PUT /stacks", () => {
+      it('Replaces stacks with newStack', () => {
+        const newStacks = [...altStacks]
+        return request(app)
+        .put(stacksUrl)
+        .send({newStacks})
+        .then((response) => {
+          console.log("seed results: ", seedResults)
+          expect(response.status).toEqual(201)
+          expect(response.body.stacks).toHaveLength(newStacks.length)
+        })
+      }) 
     })
   })
   describe("/containers endpoints", () => {
