@@ -40,36 +40,34 @@ describe('Kinrich API',() => {
   describe("/stacks Endpoints", () => {
     const stacksUrl = '/api/stacks'
     describe("GET /stacks", () => {
-      it("Returns same number of entries seeded", async (done) => {
+      it("Returns same number of entries seeded", async () => {
         const seededStacks = seedResults.createdStacks
         return request(app)
           .get(stacksUrl)
           .then((response) => {
             expect(response.status).toEqual(200)
             expect(response.body.stacks).toHaveLength(seededStacks.length)
-            done()
+            
           })
       })
-      it("Returns Genuine DB entries", async (done) => {
+      it("Returns Genuine DB entries", async () => {
         return request(app)
           .get(stacksUrl)
           .then((response) => {
             expect(response.status).toEqual(200)
             expect(response.body.stacks[0]).toHaveProperty("_id")
-            done()
           })
       })
-      it("Should not return the placeholder stack", async (done) => {
+      it("Should not return the placeholder stack", async () => {
         return request(app)
         .get(stacksUrl)
         .then((response) => {
           const {status, body} = response
           expect(status).toEqual(200)
           expect(checkForPlaceholder(body.stacks)).toBe(false)
-          done()
         })
       })
-      it("lastEdited should match placeholder", async (done) => {
+      it("lastEdited should match placeholder", async () => {
         const latestPlaceholder = {
           stackId: '@',
           content: [],
@@ -88,10 +86,8 @@ describe('Kinrich API',() => {
             expect(body).toHaveProperty("lastEdited")
             expect(body.lastEdited).toBe(latestPlaceholder.date)
             expect(checkForPlaceholder(body.stacks)).toBe(false)
-            done()
           })
         })
-
       })
     })
     describe("POST /stacks", () => {
@@ -102,7 +98,7 @@ describe('Kinrich API',() => {
         date: new Date().toISOString()
       }
 
-      it("Retrieves newly added stack", async (done) => {
+      it("Retrieves newly added stack", async () => {
         return request(app)
           .post(stacksUrl)
           .send({newStack})
@@ -113,12 +109,10 @@ describe('Kinrich API',() => {
             expect(createdStack).toHaveProperty('content')
             expect(createdStack).toHaveProperty('date')
             expect(createdStack.stackId).toEqual(newStack.stackId)
-            expect(createdStack.content).toEqual(expect.arrayContaining(newStack.content))
-            
-            done()
+            expect(createdStack.content).toEqual(expect.arrayContaining(newStack.content))          
           })
       })
-      it('Checks that number of Items in DB larger by one item', async (done) => {
+      it('Checks that number of Items in DB larger by one item', async () => {
         const seededStacks = seedResults.createdStacks
         return request(app)
         .post(stacksUrl)
@@ -129,14 +123,13 @@ describe('Kinrich API',() => {
           .get(stacksUrl)
           .then((secondResponse) => {
             expect(secondResponse.status).toEqual(200)
-            expect(secondResponse.body.stacks.length).toEqual(seededStacks.length + 1)
-            done()
+            expect(secondResponse.body.stacks.length).toEqual(seededStacks.length + 1)          
           })
         })
       })
     })
     describe('DELETE /stacks', () => {
-      it('Checks that number of stack has reduced', async(done) => {
+      it('Checks that number of stack has reduced', async() => {
         const usedCodes = ['789']
         const seededStacks = seedResults.createdStacks
         return request(app)
@@ -150,12 +143,10 @@ describe('Kinrich API',() => {
             expect(secondResponse.status).toEqual(200)
             expect(secondResponse.body.stacks.length)
             .toEqual(seededStacks.length - 1)
-            done()
-
           })
         })
       })
-      it('Removes multiple stacks', async (done) => {
+      it('Removes multiple stacks', async () => {
         const usedCodes = ['123', '321']
         const seededStacks = seedResults.createdStacks
         return request(app)
@@ -169,8 +160,6 @@ describe('Kinrich API',() => {
             expect(secondResponse.status).toEqual(200)
             expect(secondResponse.body.stacks.length)
             .toEqual(seededStacks.length - 2)
-            done()
-            
           })
         })
       })
@@ -179,41 +168,38 @@ describe('Kinrich API',() => {
   describe("/containers endpoints", () => {
     const containersUrl = '/api/containers/'
     describe('GET /containers', () => {
-      it('Return same number of entries seeded', async(done) => {
+      it('Return same number of entries seeded', async() => {
         const seededContainers = seedResults.createdContainers
         return request(app)
         .get(containersUrl)
         .then((response) => {
           expect(response.status).toEqual(200)
           expect(response.body.containers).toHaveLength(seededContainers.length)
-          done()
         })
       })
-      it('Returns container by their seal number ', async(done) => {
+      it('Returns container by their seal number ', async() => {
         const urlSuffix = 'EU18786766'
         return request(app)
         .get(`${containersUrl}seal-num/${urlSuffix}`)
         .then((response) => {
           expect(response.status).toEqual(200)
           expect(response.body[urlSuffix].sealNumber).toEqual(urlSuffix)
-          done()
         })
 
       })
-      it('Returns container by their container number', async(done) => {
+      it('Returns container by their container number', async() => {
         const urlSuffix = "MSCU 5681388"
         return request(app)
         .get(`${containersUrl}box-num/${urlSuffix}`)
         .then((response) => {
           expect(response.status).toEqual(200)
           expect(response.body[urlSuffix].containerNumber).toEqual(urlSuffix)
-          done()
         })
       })
     })
     describe('POST /containers',() => {
       const newContainer= require('../seed/testData/container_to_add.json')
-      it('Checks that number of containers in DB has grown by one item', async (done) => {
+      it('Checks that number of containers in DB has grown by one item', async () => {
         const seededContainers = seedResults.createdContainers
         return request(app)
         .post(containersUrl)
@@ -224,7 +210,6 @@ describe('Kinrich API',() => {
           .get(containersUrl)
           .then((secondResponse) => {
             expect(secondResponse.body.containers).toHaveLength(seededContainers.length + 1)
-            done()
           })
         })
       })
@@ -233,13 +218,12 @@ describe('Kinrich API',() => {
   describe("/products endpoints", () => {
     const productsUrl = '/api/products'
     describe('GET /products', () => {
-      it("Returns Object with all of the products", async (done) => {
+      it("Returns Object with all of the products", async () => {
         return request(app)
         .get(productsUrl)
         .then((response) => {
           expect(response.status).toEqual(200)
           expect(response.body.products).toStrictEqual(products)
-          done()
         })
       })
     })
@@ -247,15 +231,12 @@ describe('Kinrich API',() => {
   describe("Error Handling", () => {
     describe("404 - Not Found", () => {
       const invalidUrl = "/app/shoes"
-      it("Responds with 404 and 'Not Found' message", async (done) => {
+      it("Responds with 404 and 'Not Found' message", async () => {
         return request(app)
         .get(invalidUrl)
-        .then((response) => {
-          
-
+        .then((response) => {        
           expect(response.status).toEqual(404)
           expect(response.notFound).toBe(true)          
-          done()
         })
       })
 
