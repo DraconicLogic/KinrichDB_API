@@ -172,9 +172,12 @@ describe('Kinrich API',() => {
         .put(stacksUrl)
         .send({newStacks})
         .then((response) => {
+          //TODO: compare stacks in seed results to stacks from response and make sure that none from seed are present in response. assert this somehow.
+          
           console.log("seed results: ", seedResults)
+          console.log("responseBody: ", response.body)
           expect(response.status).toEqual(201)
-          expect(response.body.stacks).toHaveLength(newStacks.length)
+          expect(response.body.createdStacks).toHaveLength(newStacks.length)
         })
       }) 
     })

@@ -27,6 +27,24 @@ async function getStacks(req, res, next){
   })
 }
 
+async function overwriteStacks(req, res, next){
+  const { newStacks } = req.body
+  StackModel.collection.drop()
+  .then((dropped) => {
+    console.log("Promise After dropped collection: ", dropped)
+    return StackModel.insertMany(newStacks)
+  })
+  .then((createdStacks) => {
+    console.log("createdStacks: ", createdStacks)
+    res.status(201).send({createdStacks})
+  })
+  .catch((error) => {
+    console.errror("overwriteStacks has errored: ", error)
+    next(error)
+  })
+
+}
+
 async function removeStacksById(req, res, next){
   const {usedCodes} = req.body 
   let deleteReport
@@ -45,4 +63,4 @@ async function removeStacksById(req, res, next){
   res.status(200).send({deleteReport, deletedIds: usedCodes})
 }
 
-module.exports = {createStack, getStacks, removeStacksById}
+module.exports = {createStack, getStacks, removeStacksById, overwriteStacks}
