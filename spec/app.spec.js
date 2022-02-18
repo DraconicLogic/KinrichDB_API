@@ -81,13 +81,14 @@ describe('Kinrich API',() => {
           expect(firstResponse.status).toEqual(201)
           return request(app)
           .get(stacksUrl)
-          .then((secondResponse) => {
+          
+        })
+        .then((secondResponse) => {
             const {status, body} = secondResponse        
             expect(status).toEqual(200)
             expect(body).toHaveProperty("lastEdited")
             expect(body.lastEdited).toBe(latestPlaceholder.date)
             expect(checkForPlaceholder(body.stacks)).toBe(false)
-          })
         })
       })
     })
@@ -122,10 +123,11 @@ describe('Kinrich API',() => {
           expect(firstResponse.status).toEqual(201)
           return request(app)
           .get(stacksUrl)
-          .then((secondResponse) => {
+          
+        })
+        .then((secondResponse) => {
             expect(secondResponse.status).toEqual(200)
             expect(secondResponse.body.stacks.length).toEqual(seededStacks.length + 1)          
-          })
         })
       })
     })
@@ -140,11 +142,12 @@ describe('Kinrich API',() => {
           expect(firstResponse.status).toEqual(200)
           return request(app)
           .get(stacksUrl)
-          .then((secondResponse) => {
+          
+        })
+        .then((secondResponse) => {
             expect(secondResponse.status).toEqual(200)
             expect(secondResponse.body.stacks.length)
             .toEqual(seededStacks.length - 1)
-          })
         })
       })
       it('Removes multiple stacks', async () => {
@@ -165,21 +168,23 @@ describe('Kinrich API',() => {
         })
       })
     })
-    describe.only("PUT /stacks", () => {
-      it('Replaces stacks with newStack', () => {
-        const newStacks = [...altStacks]
+    describe("PUT /stacks", () => {
+      const newStacks = [...altStacks]
+      it('Replaces seeded stacks with newStacks', () => {
         return request(app)
         .put(stacksUrl)
         .send({newStacks})
-        .then((response) => {
-          //TODO: compare stacks in seed results to stacks from response and make sure that none from seed are present in response. assert this somehow.
-          
-          console.log("seed results: ", seedResults)
-          console.log("responseBody: ", response.body)
-          expect(response.status).toEqual(201)
-          expect(response.body.createdStacks).toHaveLength(newStacks.length)
+        .then((firstResponse) => {        
+          expect(firstResponse.status).toEqual(201)
+          return request(app)
+          .get(stacksUrl)
         })
-      }) 
+        .then((secondResponse) => {
+          const {stacks} = secondResponse.body
+          expect(secondResponse.status).toEqual(200)
+          expect(stacks.length).toEqual(newStacks.length)
+        })
+      })
     })
   })
   describe("/containers endpoints", () => {

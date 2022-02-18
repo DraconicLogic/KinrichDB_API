@@ -30,12 +30,10 @@ async function getStacks(req, res, next){
 async function overwriteStacks(req, res, next){
   const { newStacks } = req.body
   StackModel.collection.drop()
-  .then((dropped) => {
-    console.log("Promise After dropped collection: ", dropped)
+  .then(() => {
     return StackModel.insertMany(newStacks)
   })
   .then((createdStacks) => {
-    console.log("createdStacks: ", createdStacks)
     res.status(201).send({createdStacks})
   })
   .catch((error) => {
