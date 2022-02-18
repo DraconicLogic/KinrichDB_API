@@ -1,7 +1,7 @@
 {
-	"name": "nnennatextilesapi",
+	"name": "kinrichapi",
 	"version": "1.0.0",
-	"description": "API for interaction with Nnenna Textiles Database",
+	"description": "API for interaction with Kinrich Database",
 	"main": "index.js",
 	"jest": {
 		"testTimeout": 20000,
