@@ -41,7 +41,7 @@ describe('Kinrich API',() => {
   describe("/stacks Endpoints", () => {
     const stacksUrl = '/api/stacks'
     describe("GET /stacks", () => {
-      it("Returns same number of entries seeded", async () => {
+      it("Returns same number of entries seeded", () => {
         const seededStacks = seedResults.createdStacks
         return request(app)
           .get(stacksUrl)

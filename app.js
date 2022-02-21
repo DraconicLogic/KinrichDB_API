@@ -1,4 +1,5 @@
 require('custom-env').env()
+const process = require("process")
 const { DB_URI, DB_NAME } = process.env
 const express = require('express');
 const app = express();
@@ -27,6 +28,16 @@ app.get('/api',(req, res, next) => {
   res.sendFile(path.join(`${__dirname}/resourses.html`))
 })
 app.use('/api', apiRouter)
+
 app.use(error.notFound)
+
+process.on("exit", (code) => {
+  mongoose.disconnect()
+  .then(() => {
+    console.log(`Connection to ${DB_NAME} closed`)
+    console.log(`Exiting app in code ${code}`)
+  })
+})
+
 
 module.exports = app
