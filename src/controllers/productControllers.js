@@ -1,5 +1,5 @@
 const productModel = require('../models/productModels')
-const products = require('../products.json')
+const products = require('../../products.json')
 
 async function createProduct(req, res, next) {
 

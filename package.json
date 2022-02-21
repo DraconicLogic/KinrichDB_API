@@ -12,7 +12,7 @@
 		"dev": "nodemon index.js",
 		"test": "jest --detectOpenHandles",
 		"test:watch": "jest --watch spec",
-		"seed": "node ./seed/seed.env.js"
+		"seed": "node ./tests/seed/seed.env.js"
 	},
 	"repository": {
 		"type": "git",

@@ -14,18 +14,22 @@ mongoose.connect(`${DB_URI}`, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
   console.log(`Successfully connected to ${DB_NAME}`)
 }) 
-.catch(console.error)
+.catch((error) => {
+  console.error("FAILED TO CONNECT TO DB")
+  console.error(error)
+
+})
 
 app.use(express.json())
 app.use(cors())
 app.use(preflightHandler)
 
 app.get('/', (req, res, next) => {
-  res.sendFile(path.join(`${__dirname}/welcome.html`))
+  res.sendFile(path.join(`${__dirname}/../public/welcome.html`))
 })
 
-app.get('/api',(req, res, next) => {
-  res.sendFile(path.join(`${__dirname}/resourses.html`))
+app.get('/docs',(req, res, next) => {
+  res.sendFile(path.join(`${__dirname}/../public/docs.html`))
 })
 app.use('/api', apiRouter)
 

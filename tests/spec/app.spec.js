@@ -3,12 +3,12 @@
 */
 
 require('custom-env').env('testing')
-const app = require('../app.js')
+const app = require('../../src/app.js')
 const  request  = require('supertest')
 const { seedDB } = require('../seed/seed.js')
 const stackData = require('../seed/testData/stacks.json')
 const containerData = require('../seed/testData/containers.json')
-const products = require('../products.json')
+const products = require('../../products.json')
 const {checkForPlaceholder} = require('./testUtils.js')
 const altStacks = require("../seed/testData/altStacks.json")
 
