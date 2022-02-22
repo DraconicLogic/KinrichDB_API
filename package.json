@@ -4,7 +4,7 @@
 	"description": "API for interaction with Kinrich Database",
 	"main": "index.js",
 	"jest": {
-		"testTimeout": 20000,
+		"testTimeout": 60000,
 		"testEnvironment": "node"
 	},
 	"scripts": {
