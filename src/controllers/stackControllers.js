@@ -29,6 +29,7 @@ async function getStacks(req, res, next){
 
 async function overwriteStacks(req, res, next){
   const { newStacks } = req.body
+  console.log("Overwriting Stacks: ", newStacks)
   StackModel.collection.drop()
   .then(() => {
     return StackModel.insertMany(newStacks)
@@ -37,7 +38,7 @@ async function overwriteStacks(req, res, next){
     res.status(201).send({createdStacks})
   })
   .catch((error) => {
-    console.errror("overwriteStacks has errored: ", error)
+    console.error("overwriteStacks has errored: ", error)
     next(error)
   })
 
